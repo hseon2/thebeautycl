@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>특수 치료 | 화곡 더아름다운한의원</title>
+    <meta
+      name="description"
+      content="화곡 더아름다운한의원 특수 치료 안내. 체질과 증상에 맞춰 더하는 약침·해독 중심의 특수 치료입니다."
+    />
+    <link rel="icon" href="logo_512x512_transparent.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-alt: #f3ecf7;
+        --bg-gray: #f6f1f8;
+        --surface: #ffffff;
+        --ink: #241b2e;
+        --ink-soft: #6e6274;
+        --border: #e3daea;
+
+        --accent: #4a2168;
+        --accent-strong: #2e1440;
+        --accent-soft: #eadff0;
+        --orchid: #9b5fa8;
+        --gold: #a8763a;
+        --on-accent: #fbf3e4;
+
+        --shadow-soft: 0 18px 40px -24px rgba(46, 20, 64, 0.35);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #1a1220;
+          --bg-alt: #221a2a;
+          --bg-gray: #221c26;
+          --surface: #241c2d;
+          --ink: #f1e9f5;
+          --ink-soft: #b4a6be;
+          --border: #3a2e44;
+
+          --accent: #cba0da;
+          --accent-strong: #e4cbef;
+          --accent-soft: #33253d;
+          --orchid: #c7a0d6;
+          --gold: #d9ae68;
+          --on-accent: #241128;
+
+          --shadow-soft: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        word-break: keep-all;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        margin: 0;
+        text-wrap: balance;
+        color: inherit;
+      }
+      p {
+        margin: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      .section-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding-inline: clamp(20px, 5vw, 48px);
+      }
+      .eyebrow {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 0 0 14px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .btn-ghost {
+        border: 1px solid var(--border);
+        color: var(--ink);
+        padding: 9px 20px;
+        font-size: 0.85rem;
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .btn-solid {
+        background: var(--accent);
+        color: var(--on-accent);
+        border: none;
+      }
+      .btn-solid:hover {
+        background: var(--accent-strong);
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .header-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 14px clamp(20px, 5vw, 48px);
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .wordmark {
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--ink);
+      }
+      .wordmark img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+      }
+      .header-cta {
+        margin-left: auto;
+        flex-shrink: 0;
+        border: none !important;
+        background: var(--accent) !important;
+        color: var(--on-accent) !important;
+        padding: 10px 20px !important;
+      }
+      .header-cta:hover {
+        background: var(--accent-strong) !important;
+      }
+
+      .page-head {
+        padding-block: clamp(48px, 7vw, 80px) clamp(32px, 5vw, 56px);
+      }
+      .page-head a.back {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+      .page-head a.back:hover {
+        color: var(--accent);
+      }
+      .page-head h1 {
+        font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .page-head p {
+        color: var(--ink-soft);
+        max-width: 38em;
+        font-size: 1rem;
+      }
+
+      .care-jump {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+      .care-jump a {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 7px 14px;
+        border-radius: 999px;
+      }
+      .care-jump a:hover {
+        background: var(--accent);
+        color: var(--on-accent);
+      }
+
+      .care-list {
+        padding-bottom: clamp(48px, 7vw, 80px);
+      }
+      .care-item {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 24px;
+        padding-block: 36px;
+        border-top: 1px solid var(--border);
+        scroll-margin-top: 90px;
+      }
+      .care-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .care-icon svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--accent);
+        fill: none;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .care-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.1em;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .care-item h2 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .care-item p {
+        color: var(--ink-soft);
+        max-width: 48em;
+      }
+      @media (max-width: 560px) {
+        .care-item {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .more-care {
+        background: var(--bg-gray);
+        padding-block: clamp(48px, 7vw, 80px);
+      }
+      .more-care-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+      .more-care-col h3 {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 16px;
+      }
+      .more-care-col ul {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid var(--border);
+      }
+      .more-care-col li {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+      }
+      @media (max-width: 700px) {
+        .more-care-grid {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+      }
+
+      .cta-band {
+        padding-block: clamp(48px, 7vw, 72px);
+        text-align: center;
+      }
+      .cta-band p {
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+      .cta-actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding-block: 32px;
+      }
+      .footer-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding-inline: clamp(20px, 5vw, 48px);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        line-height: 1.8;
+      }
+    
+      .care-points {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid var(--border);
+        max-width: 48em;
+      }
+      .care-points li {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        padding-left: 18px;
+        position: relative;
+        color: var(--ink-soft);
+      }
+      .care-points li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1.2em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+      .care-nav {
+        display: flex;
+        justify-content: flex-start;
+        border-top: 1px solid var(--border);
+        padding-top: 24px;
+        margin-top: 40px;
+        font-size: 0.85rem;
+        max-width: 48em;
+      }
+      .care-nav a {
+        color: var(--ink-soft);
+      }
+      .care-nav a:hover {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="index.html">
+          <img src="logo_512x512_transparent.png" alt="더아름다운한의원 로고" />
+          더아름다운한의원
+        </a>
+        <a class="btn btn-ghost header-cta" href="tel:0260931075"
+          >전화상담 02-6093-1075</a
+        >
+      </div>
+    </header>
+
+    <section class="page-head">
+      <div class="section-inner">
+        <a class="back" href="index.html#services">&larr; 진료 과목으로 돌아가기</a>
+        <p class="eyebrow">SPECIAL</p>
+        <h1>특수 치료</h1>
+        <p>체질과 증상에 맞춰 더하는 약침·해독 중심의 특수 치료입니다.</p>
+      </div>
+    </section>
+
+    <section class="care-detail">
+      <div class="section-inner">
+        <ul class="care-points">
+            <li>산삼면역약침</li>
+            <li>녹용약침</li>
+            <li>태반약침 (자하거약침)</li>
+            <li>갱년기약침</li>
+            <li>통증약침</li>
+            <li>해독요법</li>
+        </ul>
+        <div class="care-nav">
+          <a href="care-general.html">일반 진료 보기 &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="section-inner">
+        <p>특수 치료, 편하게 상담받아 보세요.</p>
+        <div class="cta-actions">
+          <a class="btn btn-solid" href="tel:0260931075">전화 상담</a>
+          <a class="btn btn-ghost" href="index.html#visit">오시는 길 보기</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <strong>화곡 더아름다운한의원</strong><br />
+          서울특별시 강서구 화곡로132 (화곡동 1073-2) · 화곡역 6번출구 도보
+          4분<br />
+          대표자 이민정 · 사업자등록번호 823-93-01442 · 02-6093-1075
+        </div>
+        <div>© 2026 더아름다운한의원. All rights reserved.</div>
+      </div>
+    </footer>
+  </body>
+</html>
