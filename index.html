@@ -1156,6 +1156,26 @@
         color: var(--ink-soft);
         line-height: 1.6;
       }
+      .notice-list li a {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .notice-list li a:hover .notice-text {
+        color: var(--accent);
+      }
+      .notice-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 20px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .notice-more:hover {
+        color: var(--accent-strong);
+      }
 
       .visit-inner {
         padding-block: clamp(64px, 9vw, 108px);
@@ -1275,9 +1295,9 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="header-login" href="#">로그인</a>
+      <a class="header-login" href="admin.html">로그인</a>
       <div class="header-inner">
-        <a class="wordmark" href="#">
+        <a class="wordmark" href="index.html">
           <img src="logo_512x512_transparent.png" alt="더아름다운한의원 로고" />
           더아름다운한의원
         </a>
@@ -1329,11 +1349,6 @@
             <h4>한의원 안내</h4>
             <ul>
               <li><a href="#about">한의원 소개</a></li>
-              <li><a href="#hours">진료시간</a></li>
-              <li><a href="#visit">오시는길</a></li>
-              <li><a href="#about">의료진안내</a></li>
-              <li><a href="#services">진료과목</a></li>
-              <li><a href="#gallery">둘러보기</a></li>
               <li><a href="#notice">공지사항</a></li>
             </ul>
           </div>
@@ -1698,7 +1713,8 @@
           <p class="eyebrow">NOTICE</p>
           <h2>공지사항</h2>
         </div>
-        <ul class="notice-list">
+        <div id="notice-add-slot"></div>
+        <ul class="notice-list" id="notice-list">
           <li>
             <span class="notice-tag">필독</span>
             <span class="notice-text"
@@ -1720,6 +1736,7 @@
             >
           </li>
         </ul>
+        <a class="notice-more" href="notice.html">공지사항 전체보기 &rarr;</a>
       </div>
     </section>
 
@@ -1934,6 +1951,9 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin-mode.js"></script>
     <script>
       (function () {
         var thisYear = new Date().getFullYear();
@@ -1992,6 +2012,136 @@
         header.querySelectorAll(".mega-menu a").forEach(function (a) {
           a.addEventListener("click", closeMenu);
         });
+      })();
+
+      (function () {
+        if (!window.supabaseClient) return;
+        var sb = window.supabaseClient;
+        var list = document.getElementById("notice-list");
+        var addSlot = document.getElementById("notice-add-slot");
+        if (!list) return;
+
+        function loadNotices() {
+          sb.from("notices")
+            .select("id, tag, content, created_at")
+            .eq("published", true)
+            .order("created_at", { ascending: false })
+            .limit(8)
+            .then(function (res) {
+              if (res.error || !res.data || !res.data.length) return;
+              renderNotices(res.data);
+            });
+        }
+
+        function renderNotices(rows) {
+          list.innerHTML = "";
+          rows.forEach(function (row) {
+            var li = document.createElement("li");
+            var link = document.createElement("a");
+            link.href = "notice.html?id=" + row.id;
+            var tag = document.createElement("span");
+            tag.className = "notice-tag";
+            tag.textContent = row.tag;
+            var text = document.createElement("span");
+            text.className = "notice-text";
+            text.textContent = row.content;
+            link.appendChild(tag);
+            link.appendChild(text);
+            li.appendChild(link);
+            list.appendChild(li);
+
+            if (window.adminMode && window.adminMode.isOn) {
+              addNoticeAdminControls(li, row);
+            }
+          });
+        }
+
+        function addNoticeAdminControls(li, row) {
+          var editBtn = window.adminMode.makeEditBtn("✏️ 수정");
+          var delBtn = window.adminMode.makeEditBtn("🗑 삭제");
+          li.appendChild(editBtn);
+          li.appendChild(delBtn);
+
+          editBtn.addEventListener("click", function () {
+            var textEl = li.querySelector(".notice-text");
+            window.adminMode.openInlineEditor({
+              anchor: li,
+              initialText: row.content,
+              onSave: function (val) {
+                return sb
+                  .from("notices")
+                  .update({ content: val })
+                  .eq("id", row.id)
+                  .then(function () {
+                    textEl.textContent = val;
+                    row.content = val;
+                  });
+              },
+            });
+          });
+
+          delBtn.addEventListener("click", function () {
+            if (!confirm("이 공지사항을 삭제할까요?")) return;
+            sb.from("notices")
+              .delete()
+              .eq("id", row.id)
+              .then(function (res) {
+                if (res.error) alert("삭제 실패: " + res.error.message);
+                else loadNotices();
+              });
+          });
+        }
+
+        function renderAddButton() {
+          if (!addSlot) return;
+          addSlot.innerHTML = "";
+          var btn = window.adminMode.makeEditBtn("+ 새 공지 추가");
+          btn.style.margin = "0 0 16px";
+          addSlot.appendChild(btn);
+          btn.addEventListener("click", function () {
+            btn.hidden = true;
+            var tagSelect = document.createElement("select");
+            ["필독", "휴진", "안내", "이벤트"].forEach(function (opt) {
+              var o = document.createElement("option");
+              o.textContent = opt;
+              tagSelect.appendChild(o);
+            });
+            tagSelect.style.cssText =
+              "margin-bottom:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;";
+            addSlot.appendChild(tagSelect);
+            window.adminMode.openInlineEditor({
+              anchor: tagSelect,
+              initialText: "",
+              onSave: function (val) {
+                if (!val) return Promise.reject(new Error("내용을 입력해 주세요."));
+                return sb
+                  .from("notices")
+                  .insert({ tag: tagSelect.value, content: val })
+                  .then(function (res) {
+                    if (res.error) throw new Error(res.error.message);
+                    tagSelect.remove();
+                    btn.hidden = false;
+                    loadNotices();
+                  });
+              },
+              onCancel: function () {
+                tagSelect.remove();
+                btn.hidden = false;
+              },
+            });
+          });
+        }
+
+        loadNotices();
+        document.addEventListener("admin-mode:on", function () {
+          renderAddButton();
+          loadNotices();
+        });
+        document.addEventListener("admin-mode:off", function () {
+          if (addSlot) addSlot.innerHTML = "";
+          loadNotices();
+        });
+        if (window.adminMode && window.adminMode.isOn) renderAddButton();
       })();
     </script>
   </body>

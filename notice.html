@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공지사항 | 화곡 더아름다운한의원</title>
+    <meta
+      name="description"
+      content="화곡 더아름다운한의원 공지사항입니다."
+    />
+    <link rel="icon" href="logo_512x512_transparent.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-alt: #f3ecf7;
+        --bg-gray: #f6f1f8;
+        --surface: #ffffff;
+        --ink: #241b2e;
+        --ink-soft: #6e6274;
+        --border: #e3daea;
+
+        --accent: #4a2168;
+        --accent-strong: #2e1440;
+        --accent-soft: #eadff0;
+        --orchid: #9b5fa8;
+        --gold: #a8763a;
+        --on-accent: #fbf3e4;
+
+        --shadow-soft: 0 18px 40px -24px rgba(46, 20, 64, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        word-break: keep-all;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        margin: 0;
+        text-wrap: balance;
+        color: inherit;
+      }
+      p {
+        margin: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      .section-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding-inline: clamp(20px, 5vw, 48px);
+      }
+      .eyebrow {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 0 0 14px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .btn-ghost {
+        border: 1px solid var(--border);
+        color: var(--ink);
+        padding: 9px 20px;
+        font-size: 0.85rem;
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .btn-solid {
+        background: var(--accent);
+        color: var(--on-accent);
+        border: none;
+      }
+      .btn-solid:hover {
+        background: var(--accent-strong);
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .header-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 14px clamp(20px, 5vw, 48px);
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .wordmark {
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--ink);
+      }
+      .wordmark img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+      }
+      .header-cta {
+        margin-left: auto;
+        flex-shrink: 0;
+        border: none !important;
+        background: var(--accent) !important;
+        color: var(--on-accent) !important;
+        padding: 10px 20px !important;
+      }
+      .header-cta:hover {
+        background: var(--accent-strong) !important;
+      }
+      .header-cta svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+      @media (max-width: 480px) {
+        .header-cta {
+          display: none;
+        }
+      }
+
+      .page-head {
+        padding-block: clamp(48px, 7vw, 80px) clamp(32px, 5vw, 56px);
+      }
+      .page-head a.back {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+      .page-head a.back:hover {
+        color: var(--accent);
+      }
+      .page-head h1 {
+        font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .page-head p {
+        color: var(--ink-soft);
+        max-width: 38em;
+        font-size: 1rem;
+      }
+
+      .notice-body {
+        padding-bottom: clamp(64px, 9vw, 108px);
+      }
+      .notice-full-list {
+        border-top: 1px solid var(--border);
+      }
+      .notice-row-item {
+        border-bottom: 1px solid var(--border);
+      }
+      .notice-row-link {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 4px;
+      }
+      .notice-row-link:hover .notice-text {
+        color: var(--accent);
+      }
+      .notice-tag {
+        flex-shrink: 0;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+      .notice-text {
+        flex: 1;
+        font-size: 0.95rem;
+        color: var(--ink);
+        line-height: 1.6;
+        transition: color 0.15s ease;
+      }
+      .notice-date {
+        flex-shrink: 0;
+        font-size: 0.78rem;
+        color: var(--ink-soft);
+        font-variant-numeric: tabular-nums;
+      }
+      .notice-detail-tag {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 5px 12px;
+        border-radius: 999px;
+        margin-bottom: 14px;
+      }
+      .notice-detail-date {
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        margin-bottom: 24px;
+      }
+      .notice-detail-content {
+        font-size: 1rem;
+        line-height: 1.85;
+        color: var(--ink);
+        white-space: pre-wrap;
+        max-width: 42em;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 24px;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding-block: 32px;
+      }
+      .footer-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding-inline: clamp(20px, 5vw, 48px);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        line-height: 1.8;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="index.html">
+          <img src="logo_512x512_transparent.png" alt="더아름다운한의원 로고" />
+          더아름다운한의원
+        </a>
+        <a class="btn btn-ghost header-cta" href="tel:0260931075">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"
+            />
+          </svg>
+          <span class="header-cta-text">전화상담 02-6093-1075</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="page-head">
+      <div class="section-inner">
+        <a class="back" href="index.html#notice" id="back-link"
+          >&larr; 홈으로 돌아가기</a
+        >
+        <p class="eyebrow">NOTICE</p>
+        <h1 id="page-title">공지사항</h1>
+        <p id="page-sub">화곡 더아름다운한의원의 공지사항을 확인하세요.</p>
+      </div>
+    </section>
+
+    <section class="notice-body">
+      <div class="section-inner">
+        <div id="notice-add-slot"></div>
+        <div id="notice-list-view">
+          <ul class="notice-full-list" id="notice-full-list"></ul>
+        </div>
+        <div id="notice-detail-view" hidden>
+          <span class="notice-detail-tag" id="detail-tag"></span>
+          <p class="notice-detail-date" id="detail-date"></p>
+          <p class="notice-detail-content" id="detail-content"></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <strong>화곡 더아름다운한의원</strong><br />
+          서울특별시 강서구 화곡로132 (화곡동 1073-2) · 화곡역 6번출구 도보
+          4분<br />
+          대표자 이민정 · 사업자등록번호 823-93-01442 · 02-6093-1075
+        </div>
+        <div>© 2026 더아름다운한의원. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin-mode.js"></script>
+    <script>
+      (function () {
+        if (!window.supabaseClient) {
+          document.getElementById("notice-full-list").innerHTML =
+            '<p style="color:var(--ink-soft)">공지사항을 불러올 수 없습니다.</p>';
+          return;
+        }
+        var sb = window.supabaseClient;
+        var params = new URLSearchParams(location.search);
+        var noticeId = params.get("id");
+
+        var listView = document.getElementById("notice-list-view");
+        var detailView = document.getElementById("notice-detail-view");
+        var fullList = document.getElementById("notice-full-list");
+        var addSlot = document.getElementById("notice-add-slot");
+        var backLink = document.getElementById("back-link");
+        var pageSub = document.getElementById("page-sub");
+
+        if (noticeId) {
+          listView.hidden = true;
+          pageSub.hidden = true;
+          backLink.textContent = "← 공지사항 목록으로";
+          backLink.href = "notice.html";
+          loadDetail(noticeId);
+        } else {
+          detailView.hidden = true;
+          loadList();
+          document.addEventListener("admin-mode:on", function () {
+            renderAddButton();
+            loadList();
+          });
+          document.addEventListener("admin-mode:off", function () {
+            if (addSlot) addSlot.innerHTML = "";
+            loadList();
+          });
+          if (window.adminMode && window.adminMode.isOn) renderAddButton();
+        }
+
+        function formatDate(iso) {
+          return new Date(iso).toLocaleDateString("ko-KR");
+        }
+
+        function loadList() {
+          sb.from("notices")
+            .select("id, tag, content, created_at")
+            .eq("published", true)
+            .order("created_at", { ascending: false })
+            .then(function (res) {
+              fullList.innerHTML = "";
+              if (res.error || !res.data) return;
+              if (!res.data.length) {
+                fullList.innerHTML =
+                  '<p style="color:var(--ink-soft);padding:20px 4px">등록된 공지사항이 없습니다.</p>';
+                return;
+              }
+              res.data.forEach(renderListItem);
+            });
+        }
+
+        function renderListItem(row) {
+          var li = document.createElement("li");
+          li.className = "notice-row-item";
+          var a = document.createElement("a");
+          a.href = "notice.html?id=" + row.id;
+          a.className = "notice-row-link";
+          var tag = document.createElement("span");
+          tag.className = "notice-tag";
+          tag.textContent = row.tag;
+          var text = document.createElement("span");
+          text.className = "notice-text";
+          text.textContent = row.content;
+          var date = document.createElement("span");
+          date.className = "notice-date";
+          date.textContent = formatDate(row.created_at);
+          a.appendChild(tag);
+          a.appendChild(text);
+          a.appendChild(date);
+          li.appendChild(a);
+
+          if (window.adminMode && window.adminMode.isOn) {
+            var editBtn = window.adminMode.makeEditBtn("✏️ 수정");
+            var delBtn = window.adminMode.makeEditBtn("🗑 삭제");
+            li.appendChild(editBtn);
+            li.appendChild(delBtn);
+            editBtn.addEventListener("click", function () {
+              window.adminMode.openInlineEditor({
+                anchor: li,
+                initialText: row.content,
+                onSave: function (val) {
+                  return sb
+                    .from("notices")
+                    .update({ content: val })
+                    .eq("id", row.id)
+                    .then(function () {
+                      text.textContent = val;
+                      row.content = val;
+                    });
+                },
+              });
+            });
+            delBtn.addEventListener("click", function () {
+              if (!confirm("이 공지사항을 삭제할까요?")) return;
+              sb.from("notices")
+                .delete()
+                .eq("id", row.id)
+                .then(function (res) {
+                  if (res.error) alert("삭제 실패: " + res.error.message);
+                  else loadList();
+                });
+            });
+          }
+          fullList.appendChild(li);
+        }
+
+        function renderAddButton() {
+          if (!addSlot) return;
+          addSlot.innerHTML = "";
+          var btn = window.adminMode.makeEditBtn("+ 새 공지 추가");
+          btn.style.margin = "0 0 20px";
+          addSlot.appendChild(btn);
+          btn.addEventListener("click", function () {
+            btn.hidden = true;
+            var tagSelect = document.createElement("select");
+            ["필독", "휴진", "안내", "이벤트"].forEach(function (opt) {
+              var o = document.createElement("option");
+              o.textContent = opt;
+              tagSelect.appendChild(o);
+            });
+            tagSelect.style.cssText =
+              "margin-bottom:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;";
+            addSlot.appendChild(tagSelect);
+            window.adminMode.openInlineEditor({
+              anchor: tagSelect,
+              initialText: "",
+              onSave: function (val) {
+                if (!val)
+                  return Promise.reject(new Error("내용을 입력해 주세요."));
+                return sb
+                  .from("notices")
+                  .insert({ tag: tagSelect.value, content: val })
+                  .then(function (res) {
+                    if (res.error) throw new Error(res.error.message);
+                    tagSelect.remove();
+                    btn.hidden = false;
+                    loadList();
+                  });
+              },
+              onCancel: function () {
+                tagSelect.remove();
+                btn.hidden = false;
+              },
+            });
+          });
+        }
+
+        function loadDetail(id) {
+          sb.from("notices")
+            .select("id, tag, content, created_at")
+            .eq("id", id)
+            .maybeSingle()
+            .then(function (res) {
+              var detailContent = document.getElementById("detail-content");
+              if (res.error || !res.data) {
+                document.getElementById("detail-tag").hidden = true;
+                document.getElementById("detail-date").hidden = true;
+                detailContent.textContent =
+                  "해당 공지사항을 찾을 수 없습니다.";
+                return;
+              }
+              var row = res.data;
+              document.getElementById("detail-tag").textContent = row.tag;
+              document.getElementById("detail-date").textContent =
+                formatDate(row.created_at);
+              detailContent.textContent = row.content;
+
+              function addAdminControls() {
+                var old = detailView.querySelectorAll(
+                  '[data-admin-editor="1"]'
+                );
+                old.forEach(function (el) {
+                  el.remove();
+                });
+                var editBtn = window.adminMode.makeEditBtn("✏️ 수정");
+                var delBtn = window.adminMode.makeEditBtn("🗑 삭제");
+                detailView.appendChild(editBtn);
+                detailView.appendChild(delBtn);
+                editBtn.addEventListener("click", function () {
+                  window.adminMode.openInlineEditor({
+                    anchor: detailContent,
+                    initialText: row.content,
+                    tall: true,
+                    onSave: function (val) {
+                      return sb
+                        .from("notices")
+                        .update({ content: val })
+                        .eq("id", row.id)
+                        .then(function () {
+                          detailContent.textContent = val;
+                          row.content = val;
+                        });
+                    },
+                  });
+                });
+                delBtn.addEventListener("click", function () {
+                  if (!confirm("이 공지사항을 삭제할까요?")) return;
+                  sb.from("notices")
+                    .delete()
+                    .eq("id", row.id)
+                    .then(function (res) {
+                      if (res.error)
+                        alert("삭제 실패: " + res.error.message);
+                      else location.href = "notice.html";
+                    });
+                });
+              }
+              document.addEventListener("admin-mode:on", addAdminControls);
+              if (window.adminMode && window.adminMode.isOn)
+                addAdminControls();
+            });
+        }
+      })();
+    </script>
+  </body>
+</html>

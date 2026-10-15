@@ -500,5 +500,56 @@
         <div>© 2026 더아름다운한의원. All rights reserved.</div>
       </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin-mode.js"></script>
+    <script>
+      (function () {
+        if (!window.supabaseClient) return;
+        var slug = "care-03";
+        window.supabaseClient
+          .from("care_content")
+          .select("intro, body, points")
+          .eq("slug", slug)
+          .maybeSingle()
+          .then(function (res) {
+            var row = res.data;
+            if (!row) return;
+            if (row.intro) {
+              var introEl = document.querySelector(".page-head p:not(.eyebrow)");
+              if (introEl) introEl.textContent = row.intro;
+            }
+            if (row.body) {
+              var bodyEl = document.querySelector(".care-detail-body p");
+              if (bodyEl) {
+                bodyEl.textContent = row.body;
+              } else {
+                var pointsList = document.querySelector(".care-points");
+                if (pointsList) {
+                  var p = document.createElement("p");
+                  p.textContent = row.body;
+                  p.style.color = "var(--ink-soft)";
+                  p.style.marginBottom = "24px";
+                  pointsList.parentNode.insertBefore(p, pointsList);
+                }
+              }
+            }
+            if (row.points && row.points.length) {
+              var list = document.querySelector(".care-points");
+              if (list) {
+                list.innerHTML = "";
+                row.points.forEach(function (text) {
+                  var li = document.createElement("li");
+                  li.textContent = text;
+                  list.appendChild(li);
+                });
+              }
+            }
+          })
+          .then(function () {
+            if (window.adminMode) window.adminMode.initCareEditor(slug);
+          });
+      })();
+    </script>
   </body>
 </html>
