@@ -20,10 +20,11 @@
     "body.admin-mode{padding-top:36px;}" +
     "body.admin-mode .site-header{top:36px;}" +
     ".admin-edit-btn{display:inline-flex;align-items:center;gap:4px;" +
-    "font-size:0.72rem;font-weight:700;color:#4a2168;background:#eadff0;" +
-    "border:none;border-radius:999px;padding:4px 10px;cursor:pointer;" +
-    "margin:6px 0 6px 8px;font-family:inherit;vertical-align:middle;}" +
-    ".admin-edit-btn:hover{background:#4a2168;color:#fbf3e4;}" +
+    "font-size:0.78rem;font-weight:600;color:#6e6274;background:none;" +
+    "border:none;padding:4px 2px;cursor:pointer;" +
+    "margin:6px 0 6px 10px;font-family:inherit;vertical-align:middle;" +
+    "transition:color 0.15s ease;}" +
+    ".admin-edit-btn:hover{color:#4a2168;}" +
     ".admin-inline-form{margin:10px 0;max-width:42em;}" +
     ".admin-inline-form textarea,.admin-inline-form select{width:100%;" +
     "font-family:inherit;font-size:0.9rem;padding:8px 10px;" +
@@ -62,13 +63,16 @@
   }
 
   function applyState(session) {
+    var headerLogin = document.querySelector(".header-login");
     if (session) {
       document.body.classList.add("admin-mode");
       renderToolbar();
+      if (headerLogin) headerLogin.hidden = true;
       document.dispatchEvent(new CustomEvent("admin-mode:on"));
     } else {
       document.body.classList.remove("admin-mode");
       removeToolbar();
+      if (headerLogin) headerLogin.hidden = false;
       document.dispatchEvent(new CustomEvent("admin-mode:off"));
     }
   }
@@ -129,142 +133,8 @@
     btn.type = "button";
     btn.className = "admin-edit-btn";
     btn.setAttribute("data-admin-editor", "1");
-    btn.textContent = label || "✏️ 수정";
+    btn.textContent = label || "수정";
     return btn;
-  }
-
-  // ---------- care detail page inline editor ----------
-  function initCareEditor(slug) {
-    function removeEditors() {
-      document
-        .querySelectorAll('[data-admin-editor="1"], .admin-inline-form')
-        .forEach(function (el) {
-          el.remove();
-        });
-    }
-
-    function upsert(fields) {
-      var payload = Object.assign(
-        { slug: slug, updated_at: new Date().toISOString() },
-        fields
-      );
-      return sb.from("care_content").upsert(payload);
-    }
-
-    function addIntroEditor() {
-      var introEl = document.querySelector(".page-head p:not(.eyebrow)");
-      if (!introEl) return;
-      var btn = makeEditBtn();
-      introEl.parentNode.insertBefore(btn, introEl.nextSibling);
-      btn.addEventListener("click", function () {
-        btn.hidden = true;
-        openInlineEditor({
-          anchor: btn,
-          initialText: introEl.textContent,
-          onSave: function (val) {
-            return upsert({ intro: val }).then(function () {
-              introEl.textContent = val;
-              btn.hidden = false;
-            });
-          },
-          onCancel: function () {
-            btn.hidden = false;
-          },
-        });
-      });
-    }
-
-    function addBodyEditor() {
-      var bodyEl = document.querySelector(".care-detail-body p");
-      var pointsList = document.querySelector(".care-points");
-      if (!bodyEl && !pointsList) return;
-      var btn = makeEditBtn(bodyEl ? "✏️ 수정" : "✏️ 본문 추가");
-      if (bodyEl) {
-        bodyEl.parentNode.insertBefore(btn, bodyEl.nextSibling);
-      } else {
-        pointsList.parentNode.insertBefore(btn, pointsList);
-      }
-      btn.addEventListener("click", function () {
-        btn.hidden = true;
-        openInlineEditor({
-          anchor: btn,
-          initialText: bodyEl ? bodyEl.textContent : "",
-          onSave: function (val) {
-            return upsert({ body: val }).then(function () {
-              if (bodyEl) {
-                bodyEl.textContent = val;
-              } else if (val) {
-                var p = document.createElement("p");
-                p.textContent = val;
-                p.style.color = "var(--ink-soft)";
-                p.style.marginBottom = "24px";
-                pointsList.parentNode.insertBefore(p, pointsList);
-                bodyEl = p;
-              }
-              btn.hidden = false;
-            });
-          },
-          onCancel: function () {
-            btn.hidden = false;
-          },
-        });
-      });
-    }
-
-    function render() {
-      removeEditors();
-      addIntroEditor();
-      addBodyEditor();
-      addPointsEditor();
-    }
-
-    function addPointsEditor() {
-      var list = document.querySelector(".care-points");
-      if (!list) return;
-      var btn = makeEditBtn("✏️ 목록 수정");
-      list.parentNode.insertBefore(btn, list);
-      btn.addEventListener("click", function () {
-        btn.hidden = true;
-        var current = Array.prototype
-          .map(list.querySelectorAll("li"), function (li) {
-            return li.textContent;
-          })
-          .join("\n");
-        openInlineEditor({
-          anchor: btn,
-          initialText: current,
-          tall: true,
-          onSave: function (val) {
-            var points = val
-              .split("\n")
-              .map(function (s) {
-                return s.trim();
-              })
-              .filter(function (s) {
-                return s.length > 0;
-              });
-            return upsert({ points: points }).then(function () {
-              list.innerHTML = "";
-              points.forEach(function (text) {
-                var li = document.createElement("li");
-                li.textContent = text;
-                list.appendChild(li);
-              });
-              btn.hidden = false;
-            });
-          },
-          onCancel: function () {
-            btn.hidden = false;
-          },
-        });
-      });
-    }
-
-    document.addEventListener("admin-mode:on", render);
-    document.addEventListener("admin-mode:off", removeEditors);
-    sb.auth.getSession().then(function (res) {
-      if (res.data.session) render();
-    });
   }
 
   window.adminMode = {
@@ -274,6 +144,5 @@
     },
     openInlineEditor: openInlineEditor,
     makeEditBtn: makeEditBtn,
-    initCareEditor: initCareEditor,
   };
 })();

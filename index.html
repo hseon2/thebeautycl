@@ -1133,7 +1133,7 @@
       }
       .notice-list li {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 16px;
         padding: 16px 22px;
         border-bottom: 1px solid var(--border);
@@ -1152,14 +1152,34 @@
         border-radius: 999px;
       }
       .notice-text {
+        flex: 1;
+        min-width: 0;
         font-size: 0.92rem;
-        color: var(--ink-soft);
+        font-weight: 600;
+        color: var(--ink);
         line-height: 1.6;
+      }
+      .notice-date {
+        flex-shrink: 0;
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        font-variant-numeric: tabular-nums;
       }
       .notice-list li a {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 16px;
+        flex: 1;
+        min-width: 0;
+      }
+      @media (max-width: 640px) {
+        .notice-list li {
+          flex-wrap: wrap;
+          row-gap: 6px;
+        }
+        .notice-date {
+          display: none;
+        }
       }
       .notice-list li a:hover .notice-text {
         color: var(--accent);
@@ -1307,7 +1327,7 @@
           더아름다운한의원
         </a>
         <nav class="site-nav">
-          <a href="#about">원장소개</a>
+          <a href="about.html">원장소개</a>
           <div class="nav-item">
             <a href="#services">진료과목</a>
             <ul class="nav-dropdown">
@@ -1353,7 +1373,7 @@
           <div class="mega-col">
             <h4>한의원 안내</h4>
             <ul>
-              <li><a href="#about">한의원 소개</a></li>
+              <li><a href="about.html">한의원 소개</a></li>
               <li><a href="notice.html">공지사항</a></li>
             </ul>
           </div>
@@ -1592,96 +1612,96 @@
           </p>
         </div>
         <div class="service-grid">
-          <div class="service-card">
+          <a class="service-card" href="care-01.html">
             <span class="service-tag">CLINIC 01</span>
             <h3>한방성형</h3>
             <p>
               한약으로 성형하다! 우아하고 건강한 한방성형으로 자연스러운 변화를
               만듭니다.
             </p>
-            <a class="service-more" href="care-01.html">
+            <span class="service-more">
               자세히 보기
               <svg viewBox="0 0 24 24">
                 <path d="M5 12h14" />
                 <path d="M13 6l6 6-6 6" />
               </svg>
-            </a>
-          </div>
-          <div class="service-card">
+            </span>
+          </a>
+          <a class="service-card" href="care-02.html">
             <span class="service-tag">CLINIC 02</span>
             <h3>다이어트</h3>
             <p>
               체중만 빼는 다이어트는 이제 그만. 건강하고 아름답게 내 몸을
               디자인합니다.
             </p>
-            <a class="service-more" href="care-02.html">
+            <span class="service-more">
               자세히 보기
               <svg viewBox="0 0 24 24">
                 <path d="M5 12h14" />
                 <path d="M13 6l6 6-6 6" />
               </svg>
-            </a>
-          </div>
-          <div class="service-card">
+            </span>
+          </a>
+          <a class="service-card" href="care-03.html">
             <span class="service-tag">CLINIC 03</span>
             <h3>탈모 치료</h3>
             <p>
               두피치료와 몸속 원인치료를 동시에. 모발이 쑥쑥 자라는 한방
               탈모치료입니다.
             </p>
-            <a class="service-more" href="care-03.html">
+            <span class="service-more">
               자세히 보기
               <svg viewBox="0 0 24 24">
                 <path d="M5 12h14" />
                 <path d="M13 6l6 6-6 6" />
               </svg>
-            </a>
-          </div>
-          <div class="service-card">
+            </span>
+          </a>
+          <a class="service-card" href="care-04.html">
             <span class="service-tag">CLINIC 04</span>
             <h3>여드름 치료</h3>
             <p>
               체질 한약치료와 피부타입별 특수치료로 염증과 흉터를 동시에
               개선합니다.
             </p>
-            <a class="service-more" href="care-04.html">
+            <span class="service-more">
               자세히 보기
               <svg viewBox="0 0 24 24">
                 <path d="M5 12h14" />
                 <path d="M13 6l6 6-6 6" />
               </svg>
-            </a>
-          </div>
-          <div class="service-card">
+            </span>
+          </a>
+          <a class="service-card" href="care-05.html">
             <span class="service-tag">CLINIC 05</span>
             <h3>피부질환 치료</h3>
             <p>
               재발없는 피부치료. 아토피 · 건선 · 지루성피부염 · 습진 ·
               두드러기를 다스립니다.
             </p>
-            <a class="service-more" href="care-05.html">
+            <span class="service-more">
               자세히 보기
               <svg viewBox="0 0 24 24">
                 <path d="M5 12h14" />
                 <path d="M13 6l6 6-6 6" />
               </svg>
-            </a>
-          </div>
-          <div class="service-card">
+            </span>
+          </a>
+          <a class="service-card" href="care-06.html">
             <span class="service-tag">CLINIC 06</span>
             <h3>교통사고 후유증</h3>
             <p>
               손상 후 생긴 어혈을 해결하고, 빠른 치료로 일상 복귀를 돕습니다.
               자동차보험 진료.
             </p>
-            <a class="service-more" href="care-06.html">
+            <span class="service-more">
               자세히 보기
               <svg viewBox="0 0 24 24">
                 <path d="M5 12h14" />
                 <path d="M13 6l6 6-6 6" />
               </svg>
-            </a>
-          </div>
+            </span>
+          </a>
         </div>
         <div class="more-care">
           <div class="more-care-col">
@@ -2007,12 +2027,21 @@
 
         function loadNotices() {
           sb.from("notices")
-            .select("id, tag, title, created_at")
+            .select("id, tag, title, created_at, pinned")
             .eq("published", true)
+            .order("pinned", { ascending: false })
             .order("created_at", { ascending: false })
             .limit(3)
             .then(function (res) {
-              if (res.error) return;
+              if (res.error) {
+                list.innerHTML = "";
+                var errEl = document.createElement("li");
+                errEl.className = "notice-empty";
+                errEl.textContent =
+                  "공지사항을 불러오지 못했습니다: " + res.error.message;
+                list.appendChild(errEl);
+                return;
+              }
               renderNotices(res.data || []);
             });
         }
@@ -2036,8 +2065,14 @@
             var text = document.createElement("span");
             text.className = "notice-text";
             text.textContent = row.title;
+            var date = document.createElement("span");
+            date.className = "notice-date";
+            date.textContent = new Date(row.created_at).toLocaleDateString(
+              "ko-KR"
+            );
             link.appendChild(tag);
             link.appendChild(text);
+            link.appendChild(date);
             li.appendChild(link);
             list.appendChild(li);
 
@@ -2048,8 +2083,8 @@
         }
 
         function addNoticeAdminControls(li, row) {
-          var editBtn = window.adminMode.makeEditBtn("✏️ 수정");
-          var delBtn = window.adminMode.makeEditBtn("🗑 삭제");
+          var editBtn = window.adminMode.makeEditBtn("수정");
+          var delBtn = window.adminMode.makeEditBtn("삭제");
           li.appendChild(editBtn);
           li.appendChild(delBtn);
 

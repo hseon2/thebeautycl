@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>한의원 소개 | 화곡 더아름다운한의원</title>
+    <meta
+      name="description"
+      content="화곡 더아름다운한의원 소개 및 대표원장 이민정 원장 약력 안내."
+    />
+    <link rel="icon" href="logo_512x512_transparent.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-alt: #f3ecf7;
+        --bg-gray: #f6f1f8;
+        --surface: #ffffff;
+        --ink: #241b2e;
+        --ink-soft: #6e6274;
+        --border: #e3daea;
+
+        --accent: #4a2168;
+        --accent-strong: #2e1440;
+        --accent-soft: #eadff0;
+        --orchid: #9b5fa8;
+        --gold: #a8763a;
+        --on-accent: #fbf3e4;
+
+        --shadow-soft: 0 18px 40px -24px rgba(46, 20, 64, 0.35);
+      }
+
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        word-break: keep-all;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        margin: 0;
+        text-wrap: balance;
+        color: inherit;
+      }
+      p {
+        margin: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      .section-inner {
+        max-width: 880px;
+        margin: 0 auto;
+        padding-inline: clamp(20px, 5vw, 48px);
+      }
+      .eyebrow {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 0 0 14px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .btn-ghost {
+        border: 1px solid var(--border);
+        color: var(--ink);
+        padding: 9px 20px;
+        font-size: 0.85rem;
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .btn-solid {
+        background: var(--accent);
+        color: var(--on-accent);
+        border: none;
+      }
+      .btn-solid:hover {
+        background: var(--accent-strong);
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .header-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 14px clamp(10px, 3vw, 24px) 14px clamp(20px, 5vw, 48px);
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .wordmark {
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--ink);
+      }
+      .wordmark img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+      }
+      .site-nav {
+        display: flex;
+        gap: 36px;
+        margin-left: auto;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .site-nav a {
+        color: var(--ink-soft);
+      }
+      .site-nav a:hover {
+        color: var(--accent);
+      }
+      .nav-item {
+        position: relative;
+      }
+      .nav-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        margin-top: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: var(--shadow-soft);
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 140px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.15s ease,
+          transform 0.15s ease,
+          visibility 0.15s;
+        z-index: 60;
+      }
+      .nav-item:hover .nav-dropdown,
+      .nav-item:focus-within .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      .nav-dropdown a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .nav-dropdown a:hover {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      @media (max-width: 860px) {
+        .site-nav {
+          display: none;
+        }
+        .header-cta {
+          margin-left: auto;
+        }
+      }
+      .header-cta {
+        flex-shrink: 0;
+        margin-left: 16px;
+        border: none !important;
+        background: var(--accent) !important;
+        color: var(--on-accent) !important;
+        padding: 10px 20px !important;
+      }
+      .header-cta:hover {
+        background: var(--accent-strong) !important;
+      }
+      .header-cta svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+      @media (max-width: 480px) {
+        .header-cta {
+          display: none;
+        }
+      }
+      .header-login {
+        position: absolute;
+        top: 8px;
+        right: clamp(10px, 3vw, 24px);
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+      }
+      .header-login:hover {
+        color: var(--accent);
+      }
+      @media (max-width: 560px) {
+        .header-login {
+          display: none;
+        }
+      }
+      .menu-toggle {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        margin-left: 4px;
+        border: none;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .menu-toggle svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--ink);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        transition: stroke 0.15s ease;
+      }
+      .menu-toggle:hover svg,
+      .site-header.is-open .menu-toggle svg {
+        stroke: var(--accent);
+      }
+      .menu-toggle .icon-close {
+        display: none;
+      }
+      .site-header.is-open .menu-toggle .icon-hamburger {
+        display: none;
+      }
+      .site-header.is-open .menu-toggle .icon-close {
+        display: block;
+      }
+      @media (max-width: 480px) {
+        .menu-toggle {
+          margin-left: auto;
+        }
+      }
+      .mega-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease,
+          visibility 0.18s;
+      }
+      .site-header.is-open .mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .mega-menu-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 4px clamp(20px, 4vw, 40px) 32px;
+        display: flex;
+        justify-content: center;
+        gap: 56px;
+      }
+      .mega-col {
+        flex: 0 1 auto;
+        min-width: 110px;
+      }
+      .mega-col h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .mega-col h4 a {
+        color: var(--accent);
+      }
+      .mega-col h4 a:hover {
+        color: var(--accent-strong);
+      }
+      .mega-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .mega-col li a {
+        font-size: 0.86rem;
+        color: var(--ink-soft);
+      }
+      .mega-col li a:hover {
+        color: var(--accent);
+      }
+      @media (max-width: 900px) {
+        .mega-menu-inner {
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 32px 40px;
+        }
+      }
+      @media (max-width: 560px) {
+        .mega-menu-inner {
+          flex-direction: column;
+          flex-wrap: nowrap;
+          gap: 24px;
+          max-height: calc(100vh - 64px);
+          overflow-y: auto;
+        }
+      }
+      body.menu-open {
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .page-head {
+        padding-block: clamp(48px, 7vw, 80px) clamp(32px, 5vw, 56px);
+      }
+      .page-head a.back {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+      .page-head a.back:hover {
+        color: var(--accent);
+      }
+      .page-head h1 {
+        font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .page-head p {
+        color: var(--ink-soft);
+        max-width: 38em;
+        font-size: 1rem;
+      }
+
+
+      .care-list {
+        padding-bottom: clamp(48px, 7vw, 80px);
+      }
+      .care-item {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 24px;
+        padding-block: 36px;
+        border-top: 1px solid var(--border);
+        scroll-margin-top: 90px;
+      }
+      .care-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .care-icon svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--accent);
+        fill: none;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .care-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.1em;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .care-item h2 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .care-item p {
+        color: var(--ink-soft);
+        max-width: 48em;
+      }
+      @media (max-width: 560px) {
+        .care-item {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .more-care {
+        background: var(--bg-gray);
+        padding-block: clamp(48px, 7vw, 80px);
+      }
+      .more-care-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+      .more-care-col h3 {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 16px;
+      }
+      .more-care-col ul {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid var(--border);
+      }
+      .more-care-col li {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+      }
+      @media (max-width: 700px) {
+        .more-care-grid {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+      }
+
+      .cta-band {
+        padding-block: clamp(48px, 7vw, 72px);
+        text-align: center;
+      }
+      .cta-band p {
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+      .cta-actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding-block: 32px;
+      }
+      .footer-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding-inline: clamp(20px, 5vw, 48px);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        line-height: 1.8;
+      }
+    
+      .care-detail-body p {
+        color: var(--ink-soft);
+        margin-bottom: 24px;
+      }
+      .care-detail-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 24px;
+      }
+      .care-detail-body table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 24px;
+      }
+      .care-detail-body td,
+      .care-detail-body th {
+        border: 1px solid var(--border);
+        padding: 8px 10px;
+      }
+      .care-points {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid var(--border);
+        margin-bottom: 24px;
+      }
+      .care-points li {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        padding-left: 18px;
+        position: relative;
+        color: var(--ink-soft);
+      }
+      .care-points li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+      .care-nav {
+        display: flex;
+        justify-content: flex-start;
+        border-top: 1px solid var(--border);
+        padding-top: 24px;
+        margin-top: 40px;
+        font-size: 0.85rem;
+      }
+      .care-nav a {
+        color: var(--ink-soft);
+      }
+      .care-nav a:hover {
+        color: var(--accent);
+      }
+      #care-composer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(36, 27, 46, 0.5);
+        z-index: 200;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 60px 20px;
+        overflow-y: auto;
+      }
+      .care-composer-card {
+        width: 100%;
+        max-width: 780px;
+        background: var(--surface);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 40px);
+        box-shadow: var(--shadow-soft);
+      }
+      .care-composer-heading {
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+      .care-composer-field {
+        margin-bottom: 18px;
+      }
+      .care-composer-field label {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--ink-soft);
+        margin-bottom: 7px;
+      }
+      .care-composer-field textarea {
+        width: 100%;
+        font-family: inherit;
+        font-size: 0.92rem;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        min-height: 70px;
+        line-height: 1.6;
+      }
+      .care-composer-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 24px;
+      }
+      #care-edit-trigger {
+        margin: 0 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="header-login" href="admin.html">로그인</a>
+      <div class="header-inner">
+        <a class="wordmark" href="index.html">
+          <img src="logo_512x512_transparent.png" alt="더아름다운한의원 로고" />
+          더아름다운한의원
+        </a>
+        <nav class="site-nav">
+          <a href="about.html">원장소개</a>
+          <div class="nav-item">
+            <a href="index.html#services">진료과목</a>
+            <ul class="nav-dropdown">
+              <li><a href="care-01.html">한방성형</a></li>
+              <li><a href="care-02.html">다이어트</a></li>
+              <li><a href="care-03.html">탈모</a></li>
+              <li><a href="care-04.html">여드름</a></li>
+              <li><a href="care-05.html">피부질환</a></li>
+              <li><a href="care-06.html">교통사고후유증</a></li>
+            </ul>
+          </div>
+          <a href="notice.html">공지사항</a>
+          <a href="index.html#hours">진료시간</a>
+          <a href="index.html#visit">오시는길</a>
+          <a href="index.html#gallery">둘러보기</a>
+        </nav>
+        <a class="btn btn-ghost header-cta" href="tel:0260931075">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"
+            />
+          </svg>
+          <span class="header-cta-text">전화상담 02-6093-1075</span>
+        </a>
+        <button
+          class="menu-toggle"
+          aria-label="전체 메뉴"
+          aria-expanded="false"
+        >
+          <svg class="icon-hamburger" viewBox="0 0 24 24">
+            <path d="M4 7h16" />
+            <path d="M4 12h16" />
+            <path d="M4 17h16" />
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24">
+            <path d="M6 6l12 12" />
+            <path d="M18 6l-12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="mega-menu">
+        <div class="mega-menu-inner">
+          <div class="mega-col">
+            <h4>한의원 안내</h4>
+            <ul>
+              <li><a href="about.html">한의원 소개</a></li>
+              <li><a href="notice.html">공지사항</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-01.html">한방성형</a></h4>
+            <ul>
+              <li><a href="care-01.html">한방성형의 장점</a></li>
+              <li><a href="care-01.html">동안침</a></li>
+              <li><a href="care-01.html">약침성형</a></li>
+              <li><a href="care-01.html">화이트닝</a></li>
+              <li><a href="care-01.html">복합시술</a></li>
+              <li><a href="care-01.html">치료사례</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-02.html">다이어트</a></h4>
+            <ul>
+              <li><a href="care-02.html">유형별 비만</a></li>
+              <li><a href="care-02.html">다이어트 한약</a></li>
+              <li><a href="care-02.html">다이어트 치료</a></li>
+              <li><a href="care-02.html">감량후 관리</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-03.html">탈모</a></h4>
+            <ul>
+              <li><a href="care-03.html">탈모 원인</a></li>
+              <li><a href="care-03.html">탈모유형</a></li>
+              <li><a href="care-03.html">탈모치료</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-04.html">여드름</a></h4>
+            <ul>
+              <li><a href="care-04.html">유형별 여드름</a></li>
+              <li><a href="care-04.html">여드름 치료 프로그램</a></li>
+              <li><a href="care-04.html">여드름 관리</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-05.html">피부질환</a></h4>
+            <ul>
+              <li><a href="care-05.html">두드러기</a></li>
+              <li><a href="care-05.html">지루성피부염</a></li>
+              <li><a href="care-05.html">아토피</a></li>
+              <li><a href="care-05.html">습진</a></li>
+              <li><a href="care-05.html">건선</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-06.html">교통사고후유증</a></h4>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="page-head">
+      <div class="section-inner">
+        <a class="back" href="index.html">&larr; 홈으로 돌아가기</a>
+        <p class="eyebrow">ABOUT</p>
+        <h1>한의원 소개</h1>
+        <p>화곡 더아름다운한의원과 대표원장 이민정 원장을 소개합니다.</p>
+      </div>
+    </section>
+
+    <section class="care-detail">
+      <div class="section-inner">
+        <div class="care-detail-body">
+          <p>
+            안녕하세요. 한의사 이민정입니다. 한의원에 찾아오시는 모든 분들께
+            저희가 해드리는 치료가 한 번으로 끝나지 않고 건강한 생활의
+            시작이 될 수 있기를 간절히 바라며 진료에 임하고 있습니다.
+          </p>
+          <p>
+            한의학은 나무만 보는 것이 아니라 숲을 보는 의학입니다. 그래서
+            아픈 곳만 고치기보다는 생활을 바꾸고 몸이 달라지는 치료가
+            되기를 희망합니다. 찾아오시는 모든 분들께 저희의 진심이
+            감동으로 전해질 수 있도록 항상 정성을 다하겠습니다.
+          </p>
+          <p>
+            <strong>이민정 원장</strong><br />
+            원광대학교 한의과대학 졸업<br />
+            서울대학교 보건대학원 보건사회학 석사
+          </p>
+          <ul class="care-points">
+            <li>전 구리시 정경진한의원 부원장</li>
+            <li>전 의정부 보건소 한방진료실 과장</li>
+            <li>전 강서구 청암한의원장</li>
+            <li>전 부천시 경희남촌한의원장</li>
+            <li>정회원 한방피부과학회 · 한방비만학회</li>
+            <li>
+              정회원 국제경락면역요법학회 · 한의통증제형학회 ·
+              현동동의보감학회
+            </li>
+            <li>수록 [면역약침학 임상] 교재에 비만약침 치료법 등재</li>
+            <li>
+              강의 면역약침학회 비만약침 강의 · 난임치료 한방임상교육과정
+              수료
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="section-inner">
+        <p>한의원 상담이 필요하신가요? 편하게 문의해 주세요.</p>
+        <div class="cta-actions">
+          <a class="btn btn-solid" href="tel:0260931075">전화 상담</a>
+          <a class="btn btn-ghost" href="index.html#visit">오시는 길 보기</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <strong>화곡 더아름다운한의원</strong><br />
+          서울특별시 강서구 화곡로132 (화곡동 1073-2) · 화곡역 6번출구 도보
+          4분<br />
+          대표자 이민정 · 사업자등록번호 823-93-01442 · 02-6093-1075
+        </div>
+        <div>© 2026 더아름다운한의원. All rights reserved.</div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin-mode.js"></script>
+    <script>
+      (function () {
+        var header = document.querySelector(".site-header");
+        var toggle = document.querySelector(".menu-toggle");
+        if (!header || !toggle) return;
+
+        var lockedScrollY = 0;
+
+        function closeMenu() {
+          header.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("menu-open");
+          document.body.style.top = "";
+          window.scrollTo(0, lockedScrollY);
+        }
+        function openMenu() {
+          lockedScrollY = window.scrollY;
+          header.classList.add("is-open");
+          toggle.setAttribute("aria-expanded", "true");
+          document.body.classList.add("menu-open");
+          document.body.style.top = -lockedScrollY + "px";
+        }
+
+        toggle.addEventListener("click", function () {
+          if (header.classList.contains("is-open")) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+        document.addEventListener("click", function (e) {
+          if (!header.contains(e.target)) closeMenu();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeMenu();
+        });
+        header.querySelectorAll(".mega-menu a").forEach(function (a) {
+          a.addEventListener("click", closeMenu);
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        if (!window.supabaseClient) return;
+        var slug = "about";
+        window.supabaseClient
+          .from("care_content")
+          .select("intro, body, points, content")
+          .eq("slug", slug)
+          .maybeSingle()
+          .then(function (res) {
+            var row = res.data;
+            if (!row) return;
+            if (row.intro) {
+              var introEl = document.querySelector(".page-head p:not(.eyebrow)");
+              if (introEl) introEl.textContent = row.intro;
+            }
+            if (row.content) {
+              var bodyContainer = document.querySelector(".care-detail-body");
+              if (bodyContainer) bodyContainer.innerHTML = row.content;
+              return;
+            }
+            if (row.body) {
+              var bodyEl = document.querySelector(".care-detail-body p");
+              if (bodyEl) {
+                bodyEl.textContent = row.body;
+              } else {
+                var pointsList = document.querySelector(".care-points");
+                if (pointsList) {
+                  var p = document.createElement("p");
+                  p.textContent = row.body;
+                  p.style.color = "var(--ink-soft)";
+                  p.style.marginBottom = "24px";
+                  pointsList.parentNode.insertBefore(p, pointsList);
+                }
+              }
+            }
+            if (row.points && row.points.length) {
+              var list = document.querySelector(".care-points");
+              if (list) {
+                list.innerHTML = "";
+                row.points.forEach(function (text) {
+                  var li = document.createElement("li");
+                  li.textContent = text;
+                  list.appendChild(li);
+                });
+              }
+            }
+          });
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.3/tinymce.min.js"></script>
+    <script>
+      (function () {
+        if (!window.supabaseClient) return;
+        var sb = window.supabaseClient;
+        var slug = "about";
+        var introEl = document.querySelector(".page-head p:not(.eyebrow)");
+        var bodyContainer = document.querySelector(".care-detail-body");
+        var triggerSlot = document.querySelector(".care-detail .section-inner");
+
+        function destroyEditor() {
+          var ed = tinymce.get("care-composer-content");
+          if (ed) ed.remove();
+        }
+
+        function closeComposer() {
+          destroyEditor();
+          var overlay = document.getElementById("care-composer-overlay");
+          if (overlay) overlay.remove();
+        }
+
+        function openComposer() {
+          var overlay = document.createElement("div");
+          overlay.id = "care-composer-overlay";
+          overlay.innerHTML =
+            '<div class="care-composer-card">' +
+            '<p class="care-composer-heading">상세페이지 내용 수정</p>' +
+            '<div class="care-composer-field">' +
+            "<label>소개 문구 (페이지 상단)</label>" +
+            '<textarea id="care-composer-intro"></textarea>' +
+            "</div>" +
+            '<div class="care-composer-field">' +
+            "<label>본문</label>" +
+            '<textarea id="care-composer-content"></textarea>' +
+            "</div>" +
+            '<div class="care-composer-actions">' +
+            '<button type="button" class="btn btn-ghost" id="care-composer-cancel">취소</button>' +
+            '<button type="button" class="btn btn-solid" id="care-composer-save">저장</button>' +
+            "</div>" +
+            "</div>";
+          document.body.appendChild(overlay);
+
+          document.getElementById("care-composer-intro").value = introEl
+            ? introEl.textContent
+            : "";
+
+          tinymce.init({
+            selector: "#care-composer-content",
+            height: 460,
+            menubar: false,
+            license_key: "gpl",
+            branding: false,
+            plugins: "lists link image table code",
+            toolbar:
+              "undo redo | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table | removeformat code",
+            content_style:
+              "body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.7;color:#241b2e;}",
+            image_dimensions: true,
+            object_resizing: true,
+            contextmenu: "link image table",
+            paste_data_images: true,
+            paste_webkit_styles: "all",
+            paste_merge_formats: true,
+            paste_remove_styles_if_webkit: false,
+            images_upload_handler: function (blobInfo) {
+              return new Promise(function (resolve, reject) {
+                var file = blobInfo.blob();
+                var safeName = blobInfo
+                  .filename()
+                  .replace(/[^a-zA-Z0-9._-]/g, "_");
+                var path = Date.now() + "_" + safeName;
+                sb.storage
+                  .from("notice-images")
+                  .upload(path, file)
+                  .then(function (res) {
+                    if (res.error) {
+                      reject(res.error.message);
+                      return;
+                    }
+                    var urlRes = sb.storage
+                      .from("notice-images")
+                      .getPublicUrl(path);
+                    resolve(urlRes.data.publicUrl);
+                  });
+              });
+            },
+            setup: function (editor) {
+              editor.on("init", function () {
+                editor.setContent(
+                  bodyContainer ? bodyContainer.innerHTML : ""
+                );
+              });
+            },
+          });
+
+          document
+            .getElementById("care-composer-cancel")
+            .addEventListener("click", closeComposer);
+          document
+            .getElementById("care-composer-save")
+            .addEventListener("click", function () {
+              var intro = document
+                .getElementById("care-composer-intro")
+                .value.trim();
+              var content = tinymce.get("care-composer-content").getContent();
+              var saveBtn = document.getElementById("care-composer-save");
+              saveBtn.disabled = true;
+              saveBtn.textContent = "저장 중...";
+              sb.from("care_content")
+                .upsert({
+                  slug: slug,
+                  intro: intro,
+                  content: content,
+                  updated_at: new Date().toISOString(),
+                })
+                .then(function (res) {
+                  if (res.error) {
+                    alert("저장 실패: " + res.error.message);
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = "저장";
+                    return;
+                  }
+                  if (introEl) introEl.textContent = intro;
+                  if (bodyContainer) bodyContainer.innerHTML = content;
+                  closeComposer();
+                });
+            });
+        }
+
+        function renderTrigger() {
+          if (!triggerSlot || document.getElementById("care-edit-trigger"))
+            return;
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.id = "care-edit-trigger";
+          btn.className = "btn btn-ghost";
+          btn.textContent = "내용 수정";
+          btn.addEventListener("click", openComposer);
+          triggerSlot.insertBefore(btn, triggerSlot.firstChild);
+        }
+        function removeTrigger() {
+          var btn = document.getElementById("care-edit-trigger");
+          if (btn) btn.remove();
+        }
+
+        document.addEventListener("admin-mode:on", renderTrigger);
+        document.addEventListener("admin-mode:off", removeTrigger);
+        if (window.adminMode && window.adminMode.isOn) renderTrigger();
+      })();
+    </script>
+  </body>
+</html>

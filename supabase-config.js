@@ -7,6 +7,9 @@ var SUPABASE_ANON_KEY =
 // 관리자 로그인 아이디 뒤에 자동으로 붙는 이메일 도메인 (admin.html에서 사용)
 var ADMIN_LOGIN_DOMAIN = "naver.com";
 
+// 공지사항 "블로그에서 가져오기"에 사용하는 네이버 블로그 아이디 (notice.html)
+var NAVER_BLOG_ID = "thebeautycl";
+
 var supabaseClient =
   SUPABASE_ANON_KEY.indexOf("YOUR-ANON-PUBLIC-KEY") === -1 &&
   typeof window.supabase !== "undefined"

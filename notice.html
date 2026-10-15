@@ -79,7 +79,7 @@
       }
 
       .section-inner {
-        max-width: 1160px;
+        max-width: 880px;
         margin: 0 auto;
         padding-inline: clamp(20px, 5vw, 48px);
       }
@@ -144,7 +144,7 @@
       .header-inner {
         max-width: 1160px;
         margin: 0 auto;
-        padding: 14px clamp(20px, 5vw, 48px);
+        padding: 14px clamp(10px, 3vw, 24px) 14px clamp(20px, 5vw, 48px);
         display: flex;
         align-items: center;
         gap: 24px;
@@ -162,9 +162,74 @@
         height: 38px;
         object-fit: contain;
       }
-      .header-cta {
+      .site-nav {
+        display: flex;
+        gap: 36px;
         margin-left: auto;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .site-nav a {
+        color: var(--ink-soft);
+      }
+      .site-nav a:hover {
+        color: var(--accent);
+      }
+      .nav-item {
+        position: relative;
+      }
+      .nav-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        margin-top: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: var(--shadow-soft);
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 140px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.15s ease,
+          transform 0.15s ease,
+          visibility 0.15s;
+        z-index: 60;
+      }
+      .nav-item:hover .nav-dropdown,
+      .nav-item:focus-within .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      .nav-dropdown a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .nav-dropdown a:hover {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      @media (max-width: 860px) {
+        .site-nav {
+          display: none;
+        }
+        .header-cta {
+          margin-left: auto;
+        }
+      }
+      .header-cta {
         flex-shrink: 0;
+        margin-left: 16px;
         border: none !important;
         background: var(--accent) !important;
         color: var(--on-accent) !important;
@@ -188,19 +253,153 @@
           display: none;
         }
       }
+      .header-login {
+        position: absolute;
+        top: 8px;
+        right: clamp(10px, 3vw, 24px);
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+      }
+      .header-login:hover {
+        color: var(--accent);
+      }
+      @media (max-width: 560px) {
+        .header-login {
+          display: none;
+        }
+      }
+      .menu-toggle {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        margin-left: 4px;
+        border: none;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .menu-toggle svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--ink);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        transition: stroke 0.15s ease;
+      }
+      .menu-toggle:hover svg,
+      .site-header.is-open .menu-toggle svg {
+        stroke: var(--accent);
+      }
+      .menu-toggle .icon-close {
+        display: none;
+      }
+      .site-header.is-open .menu-toggle .icon-hamburger {
+        display: none;
+      }
+      .site-header.is-open .menu-toggle .icon-close {
+        display: block;
+      }
+      @media (max-width: 480px) {
+        .menu-toggle {
+          margin-left: auto;
+        }
+      }
+      .mega-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease,
+          visibility 0.18s;
+      }
+      .site-header.is-open .mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .mega-menu-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 4px clamp(20px, 4vw, 40px) 32px;
+        display: flex;
+        justify-content: center;
+        gap: 56px;
+      }
+      .mega-col {
+        flex: 0 1 auto;
+        min-width: 110px;
+      }
+      .mega-col h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .mega-col h4 a {
+        color: var(--accent);
+      }
+      .mega-col h4 a:hover {
+        color: var(--accent-strong);
+      }
+      .mega-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .mega-col li a {
+        font-size: 0.86rem;
+        color: var(--ink-soft);
+      }
+      .mega-col li a:hover {
+        color: var(--accent);
+      }
+      @media (max-width: 900px) {
+        .mega-menu-inner {
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 32px 40px;
+        }
+      }
+      @media (max-width: 560px) {
+        .mega-menu-inner {
+          flex-direction: column;
+          flex-wrap: nowrap;
+          gap: 24px;
+          max-height: calc(100vh - 64px);
+          overflow-y: auto;
+        }
+      }
+      body.menu-open {
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
+      }
 
       .page-head {
-        padding-block: clamp(48px, 7vw, 80px) clamp(32px, 5vw, 56px);
+        padding-block: clamp(24px, 3.5vw, 36px) clamp(12px, 2vw, 20px);
       }
-      .page-head a.back {
-        display: inline-flex;
+      a.back {
+        display: flex;
+        width: fit-content;
         align-items: center;
         gap: 6px;
         font-size: 0.85rem;
         color: var(--ink-soft);
         margin-bottom: 20px;
       }
-      .page-head a.back:hover {
+      a.back:hover {
         color: var(--accent);
       }
       .page-head h1 {
@@ -222,7 +421,63 @@
       .notice-add-row {
         display: flex;
         justify-content: flex-end;
+        gap: 8px;
         margin-bottom: 20px;
+      }
+      .blog-import-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+      .blog-import-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .blog-import-head h3 {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .blog-import-hint {
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        margin-bottom: 16px;
+      }
+      .blog-import-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 420px;
+        overflow-y: auto;
+        margin-bottom: 18px;
+      }
+      .blog-import-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.88rem;
+      }
+      .blog-import-row input {
+        margin-top: 3px;
+      }
+      .blog-import-row .bi-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .blog-import-row .bi-meta {
+        font-size: 0.78rem;
+        color: var(--ink-soft);
+      }
+      .blog-import-status {
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        margin-bottom: 12px;
       }
       .notice-full-list {
         border-top: 1px solid var(--border);
@@ -261,6 +516,16 @@
         padding: 4px 10px;
         border-radius: 999px;
       }
+      .pin-badge {
+        flex-shrink: 0;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        padding: 3px 9px;
+        border-radius: 999px;
+      }
       .notice-text {
         flex: 1;
         min-width: 0;
@@ -274,9 +539,17 @@
       }
       .notice-date {
         flex-shrink: 0;
-        font-size: 0.78rem;
+        font-size: 0.88rem;
         color: var(--ink-soft);
         font-variant-numeric: tabular-nums;
+      }
+      @media (max-width: 560px) {
+        .notice-date {
+          display: none;
+        }
+        .notice-row-actions {
+          gap: 10px;
+        }
       }
       .notice-empty {
         padding: 40px 4px;
@@ -284,19 +557,18 @@
         font-size: 0.92rem;
       }
       .admin-row-btn {
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: var(--accent);
-        background: var(--accent-soft);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--ink-soft);
+        background: none;
         border: none;
-        border-radius: 999px;
-        padding: 5px 12px;
+        padding: 4px 2px;
         cursor: pointer;
         font-family: inherit;
+        transition: color 0.15s ease;
       }
       .admin-row-btn:hover {
-        background: var(--accent);
-        color: var(--on-accent);
+        color: var(--accent);
       }
 
       /* detail */
@@ -316,24 +588,29 @@
         font-weight: 700;
         margin-bottom: 12px;
       }
-      .notice-detail-meta {
-        font-size: 0.82rem;
-        color: var(--ink-soft);
+      .notice-detail-meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
         margin-bottom: 28px;
         padding-bottom: 28px;
         border-bottom: 1px solid var(--border);
       }
+      .notice-detail-meta {
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+      }
       .notice-detail-content {
         font-size: 1rem;
-        line-height: 1.85;
+        line-height: 1.55;
         color: var(--ink);
-        max-width: 42em;
         padding-bottom: 32px;
         border-bottom: 1px solid var(--border);
-        margin-bottom: 24px;
+        margin-bottom: 0;
       }
       .notice-detail-content p {
-        margin: 0 0 1em;
+        margin: 0 0 0.5em;
       }
       .notice-detail-content img {
         max-width: 100%;
@@ -353,7 +630,42 @@
       }
       .notice-detail-actions {
         display: flex;
-        gap: 8px;
+        align-items: center;
+        gap: 14px;
+      }
+      .notice-detail-nav {
+        margin-top: 0;
+      }
+      .notice-detail-nav-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 2px;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.88rem;
+      }
+      .notice-detail-nav-label {
+        flex-shrink: 0;
+        width: 56px;
+        color: var(--ink-soft);
+        font-weight: 600;
+      }
+      .notice-detail-nav-title {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: var(--ink);
+      }
+      .notice-detail-nav-row:hover .notice-detail-nav-title {
+        color: var(--accent);
+      }
+      .notice-detail-nav-date {
+        flex-shrink: 0;
+        color: var(--ink-soft);
+        font-variant-numeric: tabular-nums;
+        font-size: 0.85rem;
       }
 
       /* composer */
@@ -363,7 +675,7 @@
       }
       .composer-card {
         width: 100%;
-        max-width: 760px;
+        max-width: 980px;
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 16px;
@@ -411,7 +723,8 @@
         color: var(--ink-soft);
         margin-bottom: 7px;
       }
-      .composer-tag-field input {
+      .composer-tag-field input,
+      .composer-date-field input {
         font-family: inherit;
         font-size: 0.9rem;
         padding: 8px 12px;
@@ -461,11 +774,30 @@
   </head>
   <body>
     <header class="site-header">
+      <a class="header-login" href="admin.html">로그인</a>
       <div class="header-inner">
         <a class="wordmark" href="index.html">
           <img src="logo_512x512_transparent.png" alt="더아름다운한의원 로고" />
           더아름다운한의원
         </a>
+        <nav class="site-nav">
+          <a href="about.html">원장소개</a>
+          <div class="nav-item">
+            <a href="index.html#services">진료과목</a>
+            <ul class="nav-dropdown">
+              <li><a href="care-01.html">한방성형</a></li>
+              <li><a href="care-02.html">다이어트</a></li>
+              <li><a href="care-03.html">탈모</a></li>
+              <li><a href="care-04.html">여드름</a></li>
+              <li><a href="care-05.html">피부질환</a></li>
+              <li><a href="care-06.html">교통사고후유증</a></li>
+            </ul>
+          </div>
+          <a href="notice.html">공지사항</a>
+          <a href="index.html#hours">진료시간</a>
+          <a href="index.html#visit">오시는길</a>
+          <a href="index.html#gallery">둘러보기</a>
+        </nav>
         <a class="btn btn-ghost header-cta" href="tel:0260931075">
           <svg viewBox="0 0 24 24">
             <path
@@ -474,6 +806,81 @@
           </svg>
           <span class="header-cta-text">전화상담 02-6093-1075</span>
         </a>
+        <button
+          class="menu-toggle"
+          aria-label="전체 메뉴"
+          aria-expanded="false"
+        >
+          <svg class="icon-hamburger" viewBox="0 0 24 24">
+            <path d="M4 7h16" />
+            <path d="M4 12h16" />
+            <path d="M4 17h16" />
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24">
+            <path d="M6 6l12 12" />
+            <path d="M18 6l-12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="mega-menu">
+        <div class="mega-menu-inner">
+          <div class="mega-col">
+            <h4>한의원 안내</h4>
+            <ul>
+              <li><a href="about.html">한의원 소개</a></li>
+              <li><a href="notice.html">공지사항</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-01.html">한방성형</a></h4>
+            <ul>
+              <li><a href="care-01.html">한방성형의 장점</a></li>
+              <li><a href="care-01.html">동안침</a></li>
+              <li><a href="care-01.html">약침성형</a></li>
+              <li><a href="care-01.html">화이트닝</a></li>
+              <li><a href="care-01.html">복합시술</a></li>
+              <li><a href="care-01.html">치료사례</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-02.html">다이어트</a></h4>
+            <ul>
+              <li><a href="care-02.html">유형별 비만</a></li>
+              <li><a href="care-02.html">다이어트 한약</a></li>
+              <li><a href="care-02.html">다이어트 치료</a></li>
+              <li><a href="care-02.html">감량후 관리</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-03.html">탈모</a></h4>
+            <ul>
+              <li><a href="care-03.html">탈모 원인</a></li>
+              <li><a href="care-03.html">탈모유형</a></li>
+              <li><a href="care-03.html">탈모치료</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-04.html">여드름</a></h4>
+            <ul>
+              <li><a href="care-04.html">유형별 여드름</a></li>
+              <li><a href="care-04.html">여드름 치료 프로그램</a></li>
+              <li><a href="care-04.html">여드름 관리</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-05.html">피부질환</a></h4>
+            <ul>
+              <li><a href="care-05.html">두드러기</a></li>
+              <li><a href="care-05.html">지루성피부염</a></li>
+              <li><a href="care-05.html">아토피</a></li>
+              <li><a href="care-05.html">습진</a></li>
+              <li><a href="care-05.html">건선</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-06.html">교통사고후유증</a></h4>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -482,24 +889,27 @@
         <a class="back" href="index.html#notice" id="back-link"
           >&larr; 홈으로 돌아가기</a
         >
-        <p class="eyebrow">NOTICE</p>
+        <p class="eyebrow" id="page-eyebrow">NOTICE</p>
         <h1 id="page-title">공지사항</h1>
-        <p id="page-sub">화곡 더아름다운한의원의 공지사항을 확인하세요.</p>
       </div>
     </section>
 
     <section class="notice-body">
       <div class="section-inner">
         <div class="notice-add-row" id="notice-add-slot" hidden></div>
+        <div id="blog-import-panel" hidden></div>
         <div id="notice-list-view">
           <ul class="notice-full-list" id="notice-full-list"></ul>
         </div>
         <div id="notice-detail-view" hidden>
           <span class="notice-detail-tag" id="detail-tag"></span>
           <h2 class="notice-detail-title" id="detail-title"></h2>
-          <p class="notice-detail-meta" id="detail-meta"></p>
+          <div class="notice-detail-meta-row">
+            <p class="notice-detail-meta" id="detail-meta"></p>
+            <div class="notice-detail-actions" id="detail-actions"></div>
+          </div>
           <div class="notice-detail-content" id="detail-content"></div>
-          <div class="notice-detail-actions" id="detail-actions"></div>
+          <div class="notice-detail-nav" id="detail-nav"></div>
         </div>
         <div id="notice-composer" hidden></div>
       </div>
@@ -523,6 +933,46 @@
     <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.3/tinymce.min.js"></script>
     <script>
       (function () {
+        var header = document.querySelector(".site-header");
+        var toggle = document.querySelector(".menu-toggle");
+        if (!header || !toggle) return;
+
+        var lockedScrollY = 0;
+
+        function closeMenu() {
+          header.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("menu-open");
+          document.body.style.top = "";
+          window.scrollTo(0, lockedScrollY);
+        }
+        function openMenu() {
+          lockedScrollY = window.scrollY;
+          header.classList.add("is-open");
+          toggle.setAttribute("aria-expanded", "true");
+          document.body.classList.add("menu-open");
+          document.body.style.top = -lockedScrollY + "px";
+        }
+
+        toggle.addEventListener("click", function () {
+          if (header.classList.contains("is-open")) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+        document.addEventListener("click", function (e) {
+          if (!header.contains(e.target)) closeMenu();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeMenu();
+        });
+        header.querySelectorAll(".mega-menu a").forEach(function (a) {
+          a.addEventListener("click", closeMenu);
+        });
+      })();
+
+      (function () {
         if (!window.supabaseClient) {
           document.getElementById("notice-full-list").innerHTML =
             '<p style="color:var(--ink-soft)">공지사항을 불러올 수 없습니다.</p>';
@@ -537,22 +987,32 @@
         var detailView = document.getElementById("notice-detail-view");
         var fullList = document.getElementById("notice-full-list");
         var addSlot = document.getElementById("notice-add-slot");
+        var importPanel = document.getElementById("blog-import-panel");
         var composer = document.getElementById("notice-composer");
         var backLink = document.getElementById("back-link");
-        var pageSub = document.getElementById("page-sub");
+        var pageEyebrow = document.getElementById("page-eyebrow");
+        var pageTitle = document.getElementById("page-title");
 
         var TAG_OPTIONS = ["필독", "휴진", "안내", "이벤트"];
 
         var TINYMCE_CONF = {
-          height: 380,
+          height: 600,
           menubar: false,
           license_key: "gpl",
           branding: false,
           plugins: "lists link image table code",
           toolbar:
-            "undo redo | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table | removeformat code",
+            "undo redo | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image bulkresize table | removeformat code",
           content_style:
             "body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.75;color:#241b2e;}",
+          image_dimensions: true,
+          image_title: true,
+          object_resizing: true,
+          contextmenu: "link image table",
+          paste_data_images: true,
+          paste_webkit_styles: "all",
+          paste_merge_formats: true,
+          paste_remove_styles_if_webkit: false,
           images_upload_handler: function (blobInfo) {
             return new Promise(function (resolve, reject) {
               var file = blobInfo.blob();
@@ -579,6 +1039,32 @@
 
         function formatDate(iso) {
           return new Date(iso).toLocaleDateString("ko-KR");
+        }
+
+        function pad2(n) {
+          return n < 10 ? "0" + n : "" + n;
+        }
+
+        function dateInputValue(iso) {
+          var d = iso ? new Date(iso) : new Date();
+          return (
+            d.getFullYear() +
+            "-" +
+            pad2(d.getMonth() + 1) +
+            "-" +
+            pad2(d.getDate())
+          );
+        }
+
+        function buildCreatedAt(dateStr, originalIso) {
+          var timeSource = originalIso ? new Date(originalIso) : new Date();
+          var d = new Date(dateStr + "T00:00:00");
+          d.setHours(
+            timeSource.getHours(),
+            timeSource.getMinutes(),
+            timeSource.getSeconds()
+          );
+          return d.toISOString();
         }
 
         function destroyEditor() {
@@ -613,6 +1099,10 @@
             tagOptionsHtml +
             "</datalist>" +
             "</div>" +
+            '<div class="composer-field composer-date-field">' +
+            "<label>작성일자</label>" +
+            '<input type="date" id="composer-date" />' +
+            "</div>" +
             '<div class="composer-field">' +
             "<label>작성자</label>" +
             '<div class="composer-author-static">관리자</div>' +
@@ -629,6 +1119,9 @@
 
           document.getElementById("composer-title").value = data.title || "";
           document.getElementById("composer-tag").value = data.tag || "안내";
+          document.getElementById("composer-date").value = dateInputValue(
+            data.createdAt
+          );
 
           tinymce.init(
             Object.assign({}, TINYMCE_CONF, {
@@ -636,6 +1129,52 @@
               setup: function (editor) {
                 editor.on("init", function () {
                   editor.setContent(data.content || "");
+                });
+                editor.ui.registry.addButton("bulkresize", {
+                  text: "이미지 크기 일괄 변경",
+                  onAction: function () {
+                    var imgs = editor.getBody().querySelectorAll("img");
+                    if (!imgs.length) {
+                      editor.notificationManager.open({
+                        text: "본문에 이미지가 없습니다.",
+                        type: "info",
+                        timeout: 2500,
+                      });
+                      return;
+                    }
+                    editor.windowManager.open({
+                      title: "이미지 크기 일괄 변경",
+                      body: {
+                        type: "panel",
+                        items: [
+                          {
+                            type: "input",
+                            name: "width",
+                            label: "가로 크기 (px)",
+                            inputMode: "numeric",
+                          },
+                        ],
+                      },
+                      initialData: { width: "" },
+                      buttons: [
+                        { type: "cancel", text: "취소" },
+                        { type: "submit", text: "적용", primary: true },
+                      ],
+                      onSubmit: function (api) {
+                        var width = parseInt(api.getData().width, 10);
+                        if (width > 0) {
+                          imgs.forEach(function (img) {
+                            img.removeAttribute("height");
+                            img.style.height = "auto";
+                            img.setAttribute("width", width);
+                            img.style.width = width + "px";
+                          });
+                          editor.fire("change");
+                        }
+                        api.close();
+                      },
+                    });
+                  },
                 });
               },
             })
@@ -669,23 +1208,30 @@
           var tag =
             document.getElementById("composer-tag").value.trim() || "안내";
           var content = tinymce.get("composer-editor").getContent();
+          var dateStr = document.getElementById("composer-date").value;
           if (!title) {
             alert("제목을 입력해 주세요.");
             return;
           }
+          if (!dateStr) {
+            alert("작성일자를 입력해 주세요.");
+            return;
+          }
+          var createdAt = buildCreatedAt(dateStr, data.createdAt);
           var saveBtn = document.getElementById("composer-save");
           saveBtn.disabled = true;
           saveBtn.textContent = "저장 중...";
 
+          var payload = {
+            title: title,
+            tag: tag,
+            content: content,
+            created_at: createdAt,
+          };
           var query =
             mode === "edit"
-              ? sb
-                  .from("notices")
-                  .update({ title: title, tag: tag, content: content })
-                  .eq("id", data.id)
-              : sb
-                  .from("notices")
-                  .insert({ title: title, tag: tag, content: content });
+              ? sb.from("notices").update(payload).eq("id", data.id)
+              : sb.from("notices").insert(payload);
 
           query.then(function (res) {
             if (res.error) {
@@ -710,12 +1256,20 @@
         // ---------- list ----------
         function loadList() {
           sb.from("notices")
-            .select("id, tag, title, created_at")
+            .select("id, tag, title, created_at, pinned")
             .eq("published", true)
+            .order("pinned", { ascending: false })
             .order("created_at", { ascending: false })
             .then(function (res) {
               fullList.innerHTML = "";
-              if (res.error) return;
+              if (res.error) {
+                var errEl = document.createElement("li");
+                errEl.className = "notice-empty";
+                errEl.textContent =
+                  "공지사항을 불러오지 못했습니다: " + res.error.message;
+                fullList.appendChild(errEl);
+                return;
+              }
               var rows = res.data || [];
               if (!rows.length) {
                 var empty = document.createElement("li");
@@ -747,6 +1301,12 @@
           date.className = "notice-date";
           date.textContent = formatDate(row.created_at);
           link.appendChild(tag);
+          if (row.pinned) {
+            var pinBadge = document.createElement("span");
+            pinBadge.className = "pin-badge";
+            pinBadge.textContent = "고정";
+            link.appendChild(pinBadge);
+          }
           link.appendChild(text);
           link.appendChild(date);
           main.appendChild(link);
@@ -754,16 +1314,25 @@
           if (window.adminMode && window.adminMode.isOn) {
             var actions = document.createElement("div");
             actions.className = "notice-row-actions";
+            var pinBtn = document.createElement("button");
+            pinBtn.type = "button";
+            pinBtn.className = "admin-row-btn";
+            pinBtn.textContent = row.pinned ? "고정 해제" : "고정";
+            pinBtn.addEventListener("click", function () {
+              togglePin(row);
+            });
+            actions.appendChild(pinBtn);
             var editBtn = document.createElement("button");
             editBtn.type = "button";
             editBtn.className = "admin-row-btn";
-            editBtn.textContent = "✏️ 수정";
+            editBtn.textContent = "수정";
             editBtn.addEventListener("click", function () {
               openComposer("edit", {
                 id: row.id,
                 title: row.title,
                 tag: row.tag,
                 content: null,
+                createdAt: row.created_at,
               });
               // 본문은 수정 화면 열릴 때 따로 불러온다 (목록엔 없음)
               sb.from("notices")
@@ -780,7 +1349,7 @@
             var delBtn = document.createElement("button");
             delBtn.type = "button";
             delBtn.className = "admin-row-btn";
-            delBtn.textContent = "🗑 삭제";
+            delBtn.textContent = "삭제";
             delBtn.addEventListener("click", function () {
               if (!confirm("이 공지사항을 삭제할까요?")) return;
               sb.from("notices")
@@ -800,10 +1369,49 @@
           fullList.appendChild(li);
         }
 
+        function togglePin(row) {
+          if (row.pinned) {
+            sb.from("notices")
+              .update({ pinned: false })
+              .eq("id", row.id)
+              .then(function () {
+                loadList();
+              });
+            return;
+          }
+          sb.from("notices")
+            .select("id", { count: "exact", head: true })
+            .eq("pinned", true)
+            .then(function (res) {
+              if ((res.count || 0) >= 3) {
+                alert(
+                  "고정은 최대 3개까지 가능합니다. 먼저 다른 글의 고정을 해제해 주세요."
+                );
+                return;
+              }
+              sb.from("notices")
+                .update({ pinned: true })
+                .eq("id", row.id)
+                .then(function () {
+                  loadList();
+                });
+            });
+        }
+
         function renderAddButton() {
           if (!addSlot) return;
           addSlot.hidden = false;
           addSlot.innerHTML = "";
+
+          if (typeof NAVER_BLOG_ID !== "undefined" && NAVER_BLOG_ID) {
+            var importBtn = document.createElement("button");
+            importBtn.type = "button";
+            importBtn.className = "btn btn-ghost";
+            importBtn.textContent = "블로그에서 가져오기";
+            importBtn.addEventListener("click", openBlogImportPanel);
+            addSlot.appendChild(importBtn);
+          }
+
           var btn = document.createElement("button");
           btn.type = "button";
           btn.className = "btn btn-solid";
@@ -812,6 +1420,257 @@
             openComposer("add", {});
           });
           addSlot.appendChild(btn);
+        }
+
+        // ---------- 네이버 블로그에서 가져오기 ----------
+        var RSS_TO_JSON = "https://api.rss2json.com/v1/api.json?rss_url=";
+
+        function openBlogImportPanel() {
+          listView.hidden = true;
+          if (addSlot) addSlot.hidden = true;
+          importPanel.hidden = false;
+          importPanel.innerHTML =
+            '<div class="blog-import-card">' +
+            '<div class="blog-import-head">' +
+            "<h3>네이버 블로그에서 가져오기</h3>" +
+            '<button type="button" class="btn btn-ghost" id="import-close">닫기</button>' +
+            "</div>" +
+            '<p class="blog-import-hint">' +
+            "'공지사항 및 이벤트'로 분류된 최근 글만 가져옵니다. 제목과 미리보기 이미지·요약만 가져오니, 본문 전체는 가져온 뒤 직접 작성해 주세요." +
+            "</p>" +
+            '<p class="blog-import-status" id="import-status">불러오는 중...</p>' +
+            '<div class="blog-import-list" id="import-list"></div>' +
+            '<div class="composer-actions">' +
+            '<button type="button" class="btn btn-solid" id="import-submit" disabled>선택한 글 가져오기</button>' +
+            "</div>" +
+            "</div>";
+
+          document
+            .getElementById("import-close")
+            .addEventListener("click", closeBlogImportPanel);
+
+          var rssUrl =
+            "https://rss.blog.naver.com/" + NAVER_BLOG_ID + ".xml";
+          fetch(RSS_TO_JSON + encodeURIComponent(rssUrl))
+            .then(function (res) {
+              if (!res.ok) throw new Error("불러오기 실패");
+              return res.json();
+            })
+            .then(function (data) {
+              if (data.status !== "ok" || !data.items) {
+                throw new Error("불러오기 실패");
+              }
+              var items = data.items.filter(function (item) {
+                return (item.categories || []).some(function (c) {
+                  return c.indexOf("공지") !== -1;
+                });
+              });
+              renderBlogImportList(items);
+            })
+            .catch(function () {
+              document.getElementById("import-status").textContent =
+                "블로그 글을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
+            });
+        }
+
+        function closeBlogImportPanel() {
+          importPanel.hidden = true;
+          importPanel.innerHTML = "";
+          listView.hidden = false;
+          if (addSlot) addSlot.hidden = false;
+        }
+
+        function prettifyImportedText(raw) {
+          var imgTags = raw.match(/<img[^>]*>/gi) || [];
+          var text = raw.replace(/<img[^>]*>/gi, "").trim();
+          // 네이버 RSS 요약은 줄바꿈/강조가 다 빠진 민 텍스트라, 대괄호 라벨
+          // 앞에서 줄바꿈+굵게, 문장 끝에서 줄바꿈을 넣어 읽기 좋게 정리한다.
+          text = text.replace(
+            /\[([^\]]{1,40})\]/g,
+            "<br><br><strong>[$1]</strong><br>"
+          );
+          text = text.replace(/([.!?])\s+/g, "$1<br>");
+          var html = "<p>" + text + "</p>";
+          imgTags.forEach(function (img) {
+            html += "<p>" + img + "</p>";
+          });
+          return html;
+        }
+
+        function renderBlogImportList(items) {
+          var statusEl = document.getElementById("import-status");
+          var listEl = document.getElementById("import-list");
+          var submitBtn = document.getElementById("import-submit");
+          if (!items.length) {
+            statusEl.textContent = "가져올 블로그 글이 없습니다.";
+            return;
+          }
+          statusEl.textContent = items.length + "개의 글을 찾았습니다.";
+          listEl.innerHTML = "";
+
+          items.forEach(function (item, idx) {
+            var title = item.title || "";
+            var link = item.link || "";
+            var pubDate = item.pubDate || "";
+            var description = item.description || item.content || "";
+
+            var row = document.createElement("label");
+            row.className = "blog-import-row";
+            var checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.dataset.idx = idx;
+            var body = document.createElement("div");
+            var titleEl = document.createElement("div");
+            titleEl.className = "bi-title";
+            titleEl.textContent = title;
+            var metaEl = document.createElement("div");
+            metaEl.className = "bi-meta";
+            metaEl.textContent = pubDate
+              ? new Date(pubDate).toLocaleDateString("ko-KR")
+              : "";
+            body.appendChild(titleEl);
+            body.appendChild(metaEl);
+            row.appendChild(checkbox);
+            row.appendChild(body);
+            row.dataset.title = title;
+            row.dataset.link = link;
+            row.dataset.pubDate = pubDate;
+            row.dataset.description = description;
+            listEl.appendChild(row);
+
+            checkbox.addEventListener("change", function () {
+              var any = listEl.querySelectorAll(
+                'input[type="checkbox"]:checked'
+              ).length;
+              submitBtn.disabled = any === 0;
+            });
+          });
+
+          submitBtn.addEventListener("click", function () {
+            var rows = Array.prototype.filter.call(
+              listEl.querySelectorAll(".blog-import-row"),
+              function (row) {
+                return row.querySelector('input[type="checkbox"]').checked;
+              }
+            );
+            if (!rows.length) return;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "가져오는 중...";
+
+            submitBtn.textContent = "본문 가져오는 중...";
+            Promise.all(
+              rows.map(function (row) {
+                return fetchFullBlogContent(row.dataset.link).catch(
+                  function () {
+                    return null;
+                  }
+                );
+              })
+            ).then(function (fullContents) {
+              var payloads = rows.map(function (row, i) {
+                var content =
+                  fullContents[i] ||
+                  prettifyImportedText(row.dataset.description);
+                if (row.dataset.link) {
+                  content +=
+                    '<p><a href="' +
+                    row.dataset.link +
+                    '" target="_blank" rel="noopener">네이버 블로그에서 원문 보기 →</a></p>';
+                }
+                return {
+                  title: row.dataset.title,
+                  tag: "안내",
+                  content: content,
+                  created_at: row.dataset.pubDate
+                    ? new Date(row.dataset.pubDate).toISOString()
+                    : new Date().toISOString(),
+                };
+              });
+
+              submitBtn.textContent = "저장 중...";
+              sb.from("notices")
+                .insert(payloads)
+                .then(function (res) {
+                  if (res.error) {
+                    alert("가져오기 실패: " + res.error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "선택한 글 가져오기";
+                    return;
+                  }
+                  closeBlogImportPanel();
+                  loadList();
+                });
+            });
+          });
+        }
+
+        // 네이버 모바일 블로그 페이지는 데스크톱과 달리 iframe 없이 본문이
+        // 바로 렌더링되어, 리더 프록시로 거의 전체 본문을 가져올 수 있다.
+        // (RSS 요약과 달리 완벽하진 않지만 훨씬 더 많은 내용을 가져온다.)
+        function fetchFullBlogContent(link) {
+          if (!link) return Promise.resolve(null);
+          var m = link.match(/blog\.naver\.com\/([^\/?]+)\/(\d+)/);
+          if (!m) return Promise.resolve(null);
+          var mobileUrl =
+            "https://m.blog.naver.com/" + m[1] + "/" + m[2];
+          return fetch("https://r.jina.ai/" + mobileUrl)
+            .then(function (res) {
+              if (!res.ok) throw new Error("fetch failed");
+              return res.text();
+            })
+            .then(function (text) {
+              return extractFullContentHtml(text);
+            });
+        }
+
+        function escapeHtml(str) {
+          return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        }
+
+        function extractFullContentHtml(markdown) {
+          var startIdx = markdown.indexOf("​");
+          if (startIdx === -1) return null;
+          var after = markdown.slice(startIdx);
+          var endMarkers = ["\n공감 0", "\n댓글", "\n*   [#"];
+          var endIdx = after.length;
+          endMarkers.forEach(function (marker) {
+            var i = after.indexOf(marker);
+            if (i !== -1 && i < endIdx) endIdx = i;
+          });
+          var body = after.slice(0, endIdx);
+
+          var html = "";
+          body.split("\n").forEach(function (raw) {
+            var line = raw.trim();
+            if (!line || line === "​" || line === "**​**") return;
+            if (line.indexOf("NAVER Corp") !== -1) return;
+            if ((line.match(/#/g) || []).length >= 2) return;
+
+            var imgMatch = line.match(/!\[[^\]]*\]\(([^)\s]+)/);
+            if (imgMatch) {
+              var src = imgMatch[1];
+              if (
+                src.indexOf("mblogthumb-phinf.pstatic.net") === -1 &&
+                src.indexOf("blogthumb-phinf.pstatic.net") === -1
+              ) {
+                return;
+              }
+              html += '<p><img src="' + src + '"></p>';
+              return;
+            }
+
+            var text = line.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1");
+            text = escapeHtml(text);
+            text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+            text = text.replace(/^#+\s*/, "");
+            if (text && text !== "​") {
+              html += "<p>" + text + "</p>";
+            }
+          });
+          return html || null;
         }
 
         // ---------- detail ----------
@@ -843,20 +1702,21 @@
               if (window.adminMode && window.adminMode.isOn) {
                 var editBtn = document.createElement("button");
                 editBtn.type = "button";
-                editBtn.className = "btn btn-ghost";
-                editBtn.textContent = "✏️ 수정";
+                editBtn.className = "admin-row-btn";
+                editBtn.textContent = "수정";
                 editBtn.addEventListener("click", function () {
                   openComposer("edit", {
                     id: row.id,
                     title: row.title,
                     tag: row.tag,
                     content: row.content,
+                    createdAt: row.created_at,
                   });
                 });
                 var delBtn = document.createElement("button");
                 delBtn.type = "button";
-                delBtn.className = "btn btn-ghost";
-                delBtn.textContent = "🗑 삭제";
+                delBtn.className = "admin-row-btn";
+                delBtn.textContent = "삭제";
                 delBtn.addEventListener("click", function () {
                   if (!confirm("이 공지사항을 삭제할까요?")) return;
                   sb.from("notices")
@@ -871,15 +1731,80 @@
                 detailActions.appendChild(editBtn);
                 detailActions.appendChild(delBtn);
               }
+
+              loadAdjacentNav(row);
             });
+        }
+
+        function formatDateDash(iso) {
+          var d = new Date(iso);
+          return (
+            d.getFullYear() +
+            "-" +
+            pad2(d.getMonth() + 1) +
+            "-" +
+            pad2(d.getDate())
+          );
+        }
+
+        function renderNavRow(label, post) {
+          var row = document.createElement("a");
+          row.className = "notice-detail-nav-row";
+          row.href = "notice.html?id=" + post.id;
+          var labelEl = document.createElement("span");
+          labelEl.className = "notice-detail-nav-label";
+          labelEl.textContent = label;
+          var titleEl = document.createElement("span");
+          titleEl.className = "notice-detail-nav-title";
+          titleEl.textContent = post.title;
+          var dateEl = document.createElement("span");
+          dateEl.className = "notice-detail-nav-date";
+          dateEl.textContent = formatDateDash(post.created_at);
+          row.appendChild(labelEl);
+          row.appendChild(titleEl);
+          row.appendChild(dateEl);
+          return row;
+        }
+
+        function loadAdjacentNav(row) {
+          var nav = document.getElementById("detail-nav");
+          if (!nav) return;
+          nav.innerHTML = "";
+
+          var prevQuery = sb
+            .from("notices")
+            .select("id, title, created_at")
+            .eq("published", true)
+            .gt("created_at", row.created_at)
+            .order("created_at", { ascending: true })
+            .limit(1)
+            .maybeSingle();
+          var nextQuery = sb
+            .from("notices")
+            .select("id, title, created_at")
+            .eq("published", true)
+            .lt("created_at", row.created_at)
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          Promise.all([prevQuery, nextQuery]).then(function (results) {
+            var prev = results[0].data;
+            var next = results[1].data;
+            if (prev) nav.appendChild(renderNavRow("이전글", prev));
+            if (next) nav.appendChild(renderNavRow("다음글", next));
+          });
         }
 
         // ---------- bootstrap ----------
         if (noticeId) {
           listView.hidden = true;
-          pageSub.hidden = true;
+          detailView.hidden = false;
+          pageEyebrow.hidden = true;
+          pageTitle.hidden = true;
           backLink.textContent = "← 공지사항 목록으로";
           backLink.href = "notice.html";
+          detailView.insertBefore(backLink, detailView.firstChild);
           loadDetail(noticeId);
         } else {
           detailView.hidden = true;

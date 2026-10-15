@@ -83,7 +83,7 @@
       }
 
       .section-inner {
-        max-width: 1160px;
+        max-width: 880px;
         margin: 0 auto;
         padding-inline: clamp(20px, 5vw, 48px);
       }
@@ -140,7 +140,7 @@
       .header-inner {
         max-width: 1160px;
         margin: 0 auto;
-        padding: 14px clamp(20px, 5vw, 48px);
+        padding: 14px clamp(10px, 3vw, 24px) 14px clamp(20px, 5vw, 48px);
         display: flex;
         align-items: center;
         gap: 24px;
@@ -158,9 +158,74 @@
         height: 38px;
         object-fit: contain;
       }
-      .header-cta {
+      .site-nav {
+        display: flex;
+        gap: 36px;
         margin-left: auto;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .site-nav a {
+        color: var(--ink-soft);
+      }
+      .site-nav a:hover {
+        color: var(--accent);
+      }
+      .nav-item {
+        position: relative;
+      }
+      .nav-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        margin-top: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: var(--shadow-soft);
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 140px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.15s ease,
+          transform 0.15s ease,
+          visibility 0.15s;
+        z-index: 60;
+      }
+      .nav-item:hover .nav-dropdown,
+      .nav-item:focus-within .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      .nav-dropdown a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .nav-dropdown a:hover {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      @media (max-width: 860px) {
+        .site-nav {
+          display: none;
+        }
+        .header-cta {
+          margin-left: auto;
+        }
+      }
+      .header-cta {
         flex-shrink: 0;
+        margin-left: 16px;
         border: none !important;
         background: var(--accent) !important;
         color: var(--on-accent) !important;
@@ -183,6 +248,139 @@
         .header-cta {
           display: none;
         }
+      }
+      .header-login {
+        position: absolute;
+        top: 8px;
+        right: clamp(10px, 3vw, 24px);
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+      }
+      .header-login:hover {
+        color: var(--accent);
+      }
+      @media (max-width: 560px) {
+        .header-login {
+          display: none;
+        }
+      }
+      .menu-toggle {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        margin-left: 4px;
+        border: none;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .menu-toggle svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--ink);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        transition: stroke 0.15s ease;
+      }
+      .menu-toggle:hover svg,
+      .site-header.is-open .menu-toggle svg {
+        stroke: var(--accent);
+      }
+      .menu-toggle .icon-close {
+        display: none;
+      }
+      .site-header.is-open .menu-toggle .icon-hamburger {
+        display: none;
+      }
+      .site-header.is-open .menu-toggle .icon-close {
+        display: block;
+      }
+      @media (max-width: 480px) {
+        .menu-toggle {
+          margin-left: auto;
+        }
+      }
+      .mega-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease,
+          visibility 0.18s;
+      }
+      .site-header.is-open .mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .mega-menu-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 4px clamp(20px, 4vw, 40px) 32px;
+        display: flex;
+        justify-content: center;
+        gap: 56px;
+      }
+      .mega-col {
+        flex: 0 1 auto;
+        min-width: 110px;
+      }
+      .mega-col h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .mega-col h4 a {
+        color: var(--accent);
+      }
+      .mega-col h4 a:hover {
+        color: var(--accent-strong);
+      }
+      .mega-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .mega-col li a {
+        font-size: 0.86rem;
+        color: var(--ink-soft);
+      }
+      .mega-col li a:hover {
+        color: var(--accent);
+      }
+      @media (max-width: 900px) {
+        .mega-menu-inner {
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 32px 40px;
+        }
+      }
+      @media (max-width: 560px) {
+        .mega-menu-inner {
+          flex-direction: column;
+          flex-wrap: nowrap;
+          gap: 24px;
+          max-height: calc(100vh - 64px);
+          overflow-y: auto;
+        }
+      }
+      body.menu-open {
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
       }
 
       .page-head {
@@ -210,24 +408,6 @@
         font-size: 1rem;
       }
 
-      .care-jump {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 28px;
-      }
-      .care-jump a {
-        font-size: 0.82rem;
-        font-weight: 600;
-        color: var(--accent);
-        background: var(--accent-soft);
-        padding: 7px 14px;
-        border-radius: 999px;
-      }
-      .care-jump a:hover {
-        background: var(--accent);
-        color: var(--on-accent);
-      }
 
       .care-list {
         padding-bottom: clamp(48px, 7vw, 80px);
@@ -351,41 +531,31 @@
       .care-detail {
         padding-bottom: clamp(48px, 7vw, 80px);
       }
-      .care-detail-head {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        margin-bottom: 28px;
-      }
-      .care-detail-icon {
-        flex-shrink: 0;
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: var(--accent-soft);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .care-detail-icon svg {
-        width: 32px;
-        height: 32px;
-        stroke: var(--accent);
-        fill: none;
-        stroke-width: 1.6;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
       .care-detail-body p {
         color: var(--ink-soft);
-        max-width: 56em;
         margin-bottom: 24px;
+      }
+      .care-detail-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 24px;
+      }
+      .care-detail-body table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 24px;
+      }
+      .care-detail-body td,
+      .care-detail-body th {
+        border: 1px solid var(--border);
+        padding: 8px 10px;
       }
       .care-points {
         display: flex;
         flex-direction: column;
         border-top: 1px solid var(--border);
-        max-width: 42em;
+        margin-bottom: 24px;
       }
       .care-points li {
         padding: 14px 0;
@@ -397,7 +567,8 @@
         content: "";
         position: absolute;
         left: 0;
-        top: 1.1em;
+        top: 50%;
+        transform: translateY(-50%);
         width: 6px;
         height: 6px;
         border-radius: 50%;
@@ -410,7 +581,6 @@
         padding-top: 24px;
         margin-top: 40px;
         font-size: 0.85rem;
-        max-width: 42em;
       }
       .care-nav a {
         color: var(--ink-soft);
@@ -418,15 +588,90 @@
       .care-nav a:hover {
         color: var(--accent);
       }
+      #care-composer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(36, 27, 46, 0.5);
+        z-index: 200;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 60px 20px;
+        overflow-y: auto;
+      }
+      .care-composer-card {
+        width: 100%;
+        max-width: 780px;
+        background: var(--surface);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 40px);
+        box-shadow: var(--shadow-soft);
+      }
+      .care-composer-heading {
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+      .care-composer-field {
+        margin-bottom: 18px;
+      }
+      .care-composer-field label {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--ink-soft);
+        margin-bottom: 7px;
+      }
+      .care-composer-field textarea {
+        width: 100%;
+        font-family: inherit;
+        font-size: 0.92rem;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        min-height: 70px;
+        line-height: 1.6;
+      }
+      .care-composer-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 24px;
+      }
+      #care-edit-trigger {
+        margin: 0 0 20px;
+      }
     </style>
   </head>
   <body>
     <header class="site-header">
+      <a class="header-login" href="admin.html">로그인</a>
       <div class="header-inner">
         <a class="wordmark" href="index.html">
           <img src="logo_512x512_transparent.png" alt="더아름다운한의원 로고" />
           더아름다운한의원
         </a>
+        <nav class="site-nav">
+          <a href="about.html">원장소개</a>
+          <div class="nav-item">
+            <a href="index.html#services">진료과목</a>
+            <ul class="nav-dropdown">
+              <li><a href="care-01.html">한방성형</a></li>
+              <li><a href="care-02.html">다이어트</a></li>
+              <li><a href="care-03.html">탈모</a></li>
+              <li><a href="care-04.html">여드름</a></li>
+              <li><a href="care-05.html">피부질환</a></li>
+              <li><a href="care-06.html">교통사고후유증</a></li>
+            </ul>
+          </div>
+          <a href="notice.html">공지사항</a>
+          <a href="index.html#hours">진료시간</a>
+          <a href="index.html#visit">오시는길</a>
+          <a href="index.html#gallery">둘러보기</a>
+        </nav>
         <a class="btn btn-ghost header-cta" href="tel:0260931075">
           <svg viewBox="0 0 24 24">
             <path
@@ -435,6 +680,81 @@
           </svg>
           <span class="header-cta-text">전화상담 02-6093-1075</span>
         </a>
+        <button
+          class="menu-toggle"
+          aria-label="전체 메뉴"
+          aria-expanded="false"
+        >
+          <svg class="icon-hamburger" viewBox="0 0 24 24">
+            <path d="M4 7h16" />
+            <path d="M4 12h16" />
+            <path d="M4 17h16" />
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24">
+            <path d="M6 6l12 12" />
+            <path d="M18 6l-12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="mega-menu">
+        <div class="mega-menu-inner">
+          <div class="mega-col">
+            <h4>한의원 안내</h4>
+            <ul>
+              <li><a href="about.html">한의원 소개</a></li>
+              <li><a href="notice.html">공지사항</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-01.html">한방성형</a></h4>
+            <ul>
+              <li><a href="care-01.html">한방성형의 장점</a></li>
+              <li><a href="care-01.html">동안침</a></li>
+              <li><a href="care-01.html">약침성형</a></li>
+              <li><a href="care-01.html">화이트닝</a></li>
+              <li><a href="care-01.html">복합시술</a></li>
+              <li><a href="care-01.html">치료사례</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-02.html">다이어트</a></h4>
+            <ul>
+              <li><a href="care-02.html">유형별 비만</a></li>
+              <li><a href="care-02.html">다이어트 한약</a></li>
+              <li><a href="care-02.html">다이어트 치료</a></li>
+              <li><a href="care-02.html">감량후 관리</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-03.html">탈모</a></h4>
+            <ul>
+              <li><a href="care-03.html">탈모 원인</a></li>
+              <li><a href="care-03.html">탈모유형</a></li>
+              <li><a href="care-03.html">탈모치료</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-04.html">여드름</a></h4>
+            <ul>
+              <li><a href="care-04.html">유형별 여드름</a></li>
+              <li><a href="care-04.html">여드름 치료 프로그램</a></li>
+              <li><a href="care-04.html">여드름 관리</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-05.html">피부질환</a></h4>
+            <ul>
+              <li><a href="care-05.html">두드러기</a></li>
+              <li><a href="care-05.html">지루성피부염</a></li>
+              <li><a href="care-05.html">아토피</a></li>
+              <li><a href="care-05.html">습진</a></li>
+              <li><a href="care-05.html">건선</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4><a href="care-06.html">교통사고후유증</a></h4>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -444,26 +764,11 @@
         <p class="eyebrow">CLINIC 02</p>
         <h1>다이어트</h1>
         <p>체중만 빼는 다이어트는 이제 그만. 체질 진단을 바탕으로 대사와 순환을 함께 개선해 건강하고 아름답게 내 몸을 디자인합니다.</p>
-        <div class="care-jump">
-          <a href="care-01.html">한방성형</a>
-          <a href="care-02.html">다이어트</a>
-          <a href="care-03.html">탈모 치료</a>
-          <a href="care-04.html">여드름 치료</a>
-          <a href="care-05.html">피부질환 치료</a>
-          <a href="care-06.html">교통사고 후유증</a>
-        </div>
       </div>
     </section>
 
     <section class="care-detail">
       <div class="section-inner">
-        <div class="care-detail-head">
-          <div class="care-detail-icon">
-            <svg viewBox="0 0 40 40">
-              <path d="M12 3v18" /><path d="M6 7h12" /><path d="M6 7l-3 6a3 3 0 0 0 6 0Z" /><path d="M18 7l-3 6a3 3 0 0 0 6 0Z" />
-            </svg>
-          </div>
-        </div>
         <div class="care-detail-body">
           <p>단순히 숫자를 줄이는 데 집중하기보다, 체질에 맞는 한약으로 몸의 대사와 순환을 바로잡아 요요 없이 변화를 유지할 수 있도록 돕습니다. 식습관과 생활 습관 관리까지 함께 안내합니다.</p>
           <ul class="care-points">
@@ -505,11 +810,52 @@
     <script src="admin-mode.js"></script>
     <script>
       (function () {
+        var header = document.querySelector(".site-header");
+        var toggle = document.querySelector(".menu-toggle");
+        if (!header || !toggle) return;
+
+        var lockedScrollY = 0;
+
+        function closeMenu() {
+          header.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("menu-open");
+          document.body.style.top = "";
+          window.scrollTo(0, lockedScrollY);
+        }
+        function openMenu() {
+          lockedScrollY = window.scrollY;
+          header.classList.add("is-open");
+          toggle.setAttribute("aria-expanded", "true");
+          document.body.classList.add("menu-open");
+          document.body.style.top = -lockedScrollY + "px";
+        }
+
+        toggle.addEventListener("click", function () {
+          if (header.classList.contains("is-open")) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+        document.addEventListener("click", function (e) {
+          if (!header.contains(e.target)) closeMenu();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeMenu();
+        });
+        header.querySelectorAll(".mega-menu a").forEach(function (a) {
+          a.addEventListener("click", closeMenu);
+        });
+      })();
+    </script>
+    <script>
+      (function () {
         if (!window.supabaseClient) return;
         var slug = "care-02";
         window.supabaseClient
           .from("care_content")
-          .select("intro, body, points")
+          .select("intro, body, points, content")
           .eq("slug", slug)
           .maybeSingle()
           .then(function (res) {
@@ -518,6 +864,11 @@
             if (row.intro) {
               var introEl = document.querySelector(".page-head p:not(.eyebrow)");
               if (introEl) introEl.textContent = row.intro;
+            }
+            if (row.content) {
+              var bodyContainer = document.querySelector(".care-detail-body");
+              if (bodyContainer) bodyContainer.innerHTML = row.content;
+              return;
             }
             if (row.body) {
               var bodyEl = document.querySelector(".care-detail-body p");
@@ -545,10 +896,157 @@
                 });
               }
             }
-          })
-          .then(function () {
-            if (window.adminMode) window.adminMode.initCareEditor(slug);
           });
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.3/tinymce.min.js"></script>
+    <script>
+      (function () {
+        if (!window.supabaseClient) return;
+        var sb = window.supabaseClient;
+        var slug = "care-02";
+        var introEl = document.querySelector(".page-head p:not(.eyebrow)");
+        var bodyContainer = document.querySelector(".care-detail-body");
+        var triggerSlot = document.querySelector(".care-detail .section-inner");
+
+        function destroyEditor() {
+          var ed = tinymce.get("care-composer-content");
+          if (ed) ed.remove();
+        }
+
+        function closeComposer() {
+          destroyEditor();
+          var overlay = document.getElementById("care-composer-overlay");
+          if (overlay) overlay.remove();
+        }
+
+        function openComposer() {
+          var overlay = document.createElement("div");
+          overlay.id = "care-composer-overlay";
+          overlay.innerHTML =
+            '<div class="care-composer-card">' +
+            '<p class="care-composer-heading">상세페이지 내용 수정</p>' +
+            '<div class="care-composer-field">' +
+            "<label>소개 문구 (페이지 상단)</label>" +
+            '<textarea id="care-composer-intro"></textarea>' +
+            "</div>" +
+            '<div class="care-composer-field">' +
+            "<label>본문</label>" +
+            '<textarea id="care-composer-content"></textarea>' +
+            "</div>" +
+            '<div class="care-composer-actions">' +
+            '<button type="button" class="btn btn-ghost" id="care-composer-cancel">취소</button>' +
+            '<button type="button" class="btn btn-solid" id="care-composer-save">저장</button>' +
+            "</div>" +
+            "</div>";
+          document.body.appendChild(overlay);
+
+          document.getElementById("care-composer-intro").value = introEl
+            ? introEl.textContent
+            : "";
+
+          tinymce.init({
+            selector: "#care-composer-content",
+            height: 460,
+            menubar: false,
+            license_key: "gpl",
+            branding: false,
+            plugins: "lists link image table code",
+            toolbar:
+              "undo redo | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table | removeformat code",
+            content_style:
+              "body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.7;color:#241b2e;}",
+            image_dimensions: true,
+            object_resizing: true,
+            contextmenu: "link image table",
+            paste_data_images: true,
+            paste_webkit_styles: "all",
+            paste_merge_formats: true,
+            paste_remove_styles_if_webkit: false,
+            images_upload_handler: function (blobInfo) {
+              return new Promise(function (resolve, reject) {
+                var file = blobInfo.blob();
+                var safeName = blobInfo
+                  .filename()
+                  .replace(/[^a-zA-Z0-9._-]/g, "_");
+                var path = Date.now() + "_" + safeName;
+                sb.storage
+                  .from("notice-images")
+                  .upload(path, file)
+                  .then(function (res) {
+                    if (res.error) {
+                      reject(res.error.message);
+                      return;
+                    }
+                    var urlRes = sb.storage
+                      .from("notice-images")
+                      .getPublicUrl(path);
+                    resolve(urlRes.data.publicUrl);
+                  });
+              });
+            },
+            setup: function (editor) {
+              editor.on("init", function () {
+                editor.setContent(
+                  bodyContainer ? bodyContainer.innerHTML : ""
+                );
+              });
+            },
+          });
+
+          document
+            .getElementById("care-composer-cancel")
+            .addEventListener("click", closeComposer);
+          document
+            .getElementById("care-composer-save")
+            .addEventListener("click", function () {
+              var intro = document
+                .getElementById("care-composer-intro")
+                .value.trim();
+              var content = tinymce.get("care-composer-content").getContent();
+              var saveBtn = document.getElementById("care-composer-save");
+              saveBtn.disabled = true;
+              saveBtn.textContent = "저장 중...";
+              sb.from("care_content")
+                .upsert({
+                  slug: slug,
+                  intro: intro,
+                  content: content,
+                  updated_at: new Date().toISOString(),
+                })
+                .then(function (res) {
+                  if (res.error) {
+                    alert("저장 실패: " + res.error.message);
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = "저장";
+                    return;
+                  }
+                  if (introEl) introEl.textContent = intro;
+                  if (bodyContainer) bodyContainer.innerHTML = content;
+                  closeComposer();
+                });
+            });
+        }
+
+        function renderTrigger() {
+          if (!triggerSlot || document.getElementById("care-edit-trigger"))
+            return;
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.id = "care-edit-trigger";
+          btn.className = "btn btn-ghost";
+          btn.textContent = "내용 수정";
+          btn.addEventListener("click", openComposer);
+          triggerSlot.insertBefore(btn, triggerSlot.firstChild);
+        }
+        function removeTrigger() {
+          var btn = document.getElementById("care-edit-trigger");
+          if (btn) btn.remove();
+        }
+
+        document.addEventListener("admin-mode:on", renderTrigger);
+        document.addEventListener("admin-mode:off", removeTrigger);
+        if (window.adminMode && window.adminMode.isOn) renderTrigger();
       })();
     </script>
   </body>
