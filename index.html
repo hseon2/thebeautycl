@@ -285,13 +285,6 @@
       }
       @media (max-width: 480px) {
         .header-cta {
-          width: 40px;
-          height: 40px;
-          padding: 0 !important;
-          border-radius: 50%;
-          margin-left: 8px;
-        }
-        .header-cta-text {
           display: none;
         }
       }
@@ -410,6 +403,7 @@
       @media (max-width: 560px) {
         .mega-menu-inner {
           flex-direction: column;
+          flex-wrap: nowrap;
           gap: 24px;
           max-height: calc(100vh - 64px);
           overflow-y: auto;
@@ -823,13 +817,13 @@
       }
       .service-card {
         background: var(--surface);
-        padding: 36px 20px;
+        padding: 26px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 16px;
-        min-height: 340px;
+        gap: 11px;
+        min-height: 250px;
         transition:
           transform 0.18s ease,
           box-shadow 0.18s ease;
@@ -842,8 +836,8 @@
         z-index: 1;
       }
       .service-icon {
-        width: 38px;
-        height: 38px;
+        width: 30px;
+        height: 30px;
         stroke: var(--accent);
         fill: none;
         stroke-width: 1.6;
@@ -851,12 +845,12 @@
         stroke-linejoin: round;
       }
       .service-card h3 {
-        font-size: 1.08rem;
+        font-size: 1rem;
         font-weight: 700;
       }
       .service-card p {
         color: var(--ink-soft);
-        font-size: 0.89rem;
+        font-size: 0.85rem;
         flex-grow: 1;
       }
       .service-tag {
