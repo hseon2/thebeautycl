@@ -1173,6 +1173,11 @@
         font-weight: 700;
         color: var(--accent);
       }
+      .notice-empty {
+        padding: 20px 22px;
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+      }
       .notice-more:hover {
         color: var(--accent-strong);
       }
@@ -1314,7 +1319,7 @@
               <li><a href="care-06.html">교통사고후유증</a></li>
             </ul>
           </div>
-          <a href="#notice">공지사항</a>
+          <a href="notice.html">공지사항</a>
           <a href="#hours">진료시간</a>
           <a href="#visit">오시는길</a>
           <a href="#gallery">둘러보기</a>
@@ -1349,7 +1354,7 @@
             <h4>한의원 안내</h4>
             <ul>
               <li><a href="#about">한의원 소개</a></li>
-              <li><a href="#notice">공지사항</a></li>
+              <li><a href="notice.html">공지사항</a></li>
             </ul>
           </div>
           <div class="mega-col">
@@ -1714,28 +1719,7 @@
           <h2>공지사항</h2>
         </div>
         <div id="notice-add-slot"></div>
-        <ul class="notice-list" id="notice-list">
-          <li>
-            <span class="notice-tag">필독</span>
-            <span class="notice-text"
-              >모든 진료는 사전 예약제로 운영됩니다. 방문 전
-              전화(02-6093-1075)로 예약해 주세요.</span
-            >
-          </li>
-          <li>
-            <span class="notice-tag">휴진</span>
-            <span class="notice-text"
-              >수요일은 정기 휴진일입니다. 공휴일이 포함된 주는 정상
-              진료합니다.</span
-            >
-          </li>
-          <li>
-            <span class="notice-tag">안내</span>
-            <span class="notice-text"
-              >건물 1층 화곡정육식당 주차장을 이용하실 수 있습니다.</span
-            >
-          </li>
-        </ul>
+        <ul class="notice-list" id="notice-list"></ul>
         <a class="notice-more" href="notice.html">공지사항 전체보기 &rarr;</a>
       </div>
     </section>
@@ -2023,18 +2007,25 @@
 
         function loadNotices() {
           sb.from("notices")
-            .select("id, tag, content, created_at")
+            .select("id, tag, title, created_at")
             .eq("published", true)
             .order("created_at", { ascending: false })
-            .limit(8)
+            .limit(3)
             .then(function (res) {
-              if (res.error || !res.data || !res.data.length) return;
-              renderNotices(res.data);
+              if (res.error) return;
+              renderNotices(res.data || []);
             });
         }
 
         function renderNotices(rows) {
           list.innerHTML = "";
+          if (!rows.length) {
+            var empty = document.createElement("li");
+            empty.className = "notice-empty";
+            empty.textContent = "등록된 공지사항이 없습니다.";
+            list.appendChild(empty);
+            return;
+          }
           rows.forEach(function (row) {
             var li = document.createElement("li");
             var link = document.createElement("a");
@@ -2044,7 +2035,7 @@
             tag.textContent = row.tag;
             var text = document.createElement("span");
             text.className = "notice-text";
-            text.textContent = row.content;
+            text.textContent = row.title;
             link.appendChild(tag);
             link.appendChild(text);
             li.appendChild(link);
@@ -2063,21 +2054,7 @@
           li.appendChild(delBtn);
 
           editBtn.addEventListener("click", function () {
-            var textEl = li.querySelector(".notice-text");
-            window.adminMode.openInlineEditor({
-              anchor: li,
-              initialText: row.content,
-              onSave: function (val) {
-                return sb
-                  .from("notices")
-                  .update({ content: val })
-                  .eq("id", row.id)
-                  .then(function () {
-                    textEl.textContent = val;
-                    row.content = val;
-                  });
-              },
-            });
+            location.href = "notice.html?id=" + row.id;
           });
 
           delBtn.addEventListener("click", function () {
@@ -2095,40 +2072,11 @@
         function renderAddButton() {
           if (!addSlot) return;
           addSlot.innerHTML = "";
-          var btn = window.adminMode.makeEditBtn("+ 새 공지 추가");
+          var btn = window.adminMode.makeEditBtn("+ 새 공지 작성하기");
           btn.style.margin = "0 0 16px";
           addSlot.appendChild(btn);
           btn.addEventListener("click", function () {
-            btn.hidden = true;
-            var tagSelect = document.createElement("select");
-            ["필독", "휴진", "안내", "이벤트"].forEach(function (opt) {
-              var o = document.createElement("option");
-              o.textContent = opt;
-              tagSelect.appendChild(o);
-            });
-            tagSelect.style.cssText =
-              "margin-bottom:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;";
-            addSlot.appendChild(tagSelect);
-            window.adminMode.openInlineEditor({
-              anchor: tagSelect,
-              initialText: "",
-              onSave: function (val) {
-                if (!val) return Promise.reject(new Error("내용을 입력해 주세요."));
-                return sb
-                  .from("notices")
-                  .insert({ tag: tagSelect.value, content: val })
-                  .then(function (res) {
-                    if (res.error) throw new Error(res.error.message);
-                    tagSelect.remove();
-                    btn.hidden = false;
-                    loadNotices();
-                  });
-              },
-              onCancel: function () {
-                tagSelect.remove();
-                btn.hidden = false;
-              },
-            });
+            location.href = "notice.html?new=1";
           });
         }
 

@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지사항 | 화곡 더아름다운한의원</title>
-    <meta
-      name="description"
-      content="화곡 더아름다운한의원 공지사항입니다."
-    />
+    <meta name="description" content="화곡 더아름다운한의원 공지사항입니다." />
     <link rel="icon" href="logo_512x512_transparent.png" type="image/png" />
     <link
       rel="stylesheet"
@@ -104,6 +101,9 @@
         font-weight: 700;
         font-size: 0.95rem;
         white-space: nowrap;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
         transition:
           transform 0.15s ease,
           background 0.15s ease,
@@ -112,6 +112,7 @@
       }
       .btn-ghost {
         border: 1px solid var(--border);
+        background: none;
         color: var(--ink);
         padding: 9px 20px;
         font-size: 0.85rem;
@@ -127,6 +128,10 @@
       }
       .btn-solid:hover {
         background: var(--accent-strong);
+      }
+      .btn-solid:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
       }
 
       .site-header {
@@ -212,20 +217,39 @@
       .notice-body {
         padding-bottom: clamp(64px, 9vw, 108px);
       }
+
+      /* list */
+      .notice-add-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+      }
       .notice-full-list {
         border-top: 1px solid var(--border);
       }
       .notice-row-item {
         border-bottom: 1px solid var(--border);
       }
-      .notice-row-link {
+      .notice-row-main {
         display: flex;
         align-items: center;
         gap: 16px;
         padding: 20px 4px;
       }
+      .notice-row-link {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+        min-width: 0;
+      }
       .notice-row-link:hover .notice-text {
         color: var(--accent);
+      }
+      .notice-row-actions {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
       }
       .notice-tag {
         flex-shrink: 0;
@@ -239,10 +263,14 @@
       }
       .notice-text {
         flex: 1;
+        min-width: 0;
         font-size: 0.95rem;
         color: var(--ink);
         line-height: 1.6;
         transition: color 0.15s ease;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .notice-date {
         flex-shrink: 0;
@@ -250,6 +278,28 @@
         color: var(--ink-soft);
         font-variant-numeric: tabular-nums;
       }
+      .notice-empty {
+        padding: 40px 4px;
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+      }
+      .admin-row-btn {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: none;
+        border-radius: 999px;
+        padding: 5px 12px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .admin-row-btn:hover {
+        background: var(--accent);
+        color: var(--on-accent);
+      }
+
+      /* detail */
       .notice-detail-tag {
         display: inline-block;
         font-size: 0.75rem;
@@ -259,22 +309,132 @@
         background: var(--accent-soft);
         padding: 5px 12px;
         border-radius: 999px;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
       }
-      .notice-detail-date {
+      .notice-detail-title {
+        font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      .notice-detail-meta {
         font-size: 0.82rem;
         color: var(--ink-soft);
-        margin-bottom: 24px;
+        margin-bottom: 28px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--border);
       }
       .notice-detail-content {
         font-size: 1rem;
         line-height: 1.85;
         color: var(--ink);
-        white-space: pre-wrap;
         max-width: 42em;
         padding-bottom: 32px;
         border-bottom: 1px solid var(--border);
         margin-bottom: 24px;
+      }
+      .notice-detail-content p {
+        margin: 0 0 1em;
+      }
+      .notice-detail-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 12px 0;
+      }
+      .notice-detail-content table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 16px 0;
+      }
+      .notice-detail-content td,
+      .notice-detail-content th {
+        border: 1px solid var(--border);
+        padding: 8px 10px;
+      }
+      .notice-detail-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      /* composer */
+      #notice-composer {
+        display: flex;
+        justify-content: center;
+      }
+      .composer-card {
+        width: 100%;
+        max-width: 760px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 44px);
+        box-shadow: var(--shadow-soft);
+      }
+      .composer-heading {
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+      .composer-field {
+        margin-bottom: 18px;
+      }
+      .composer-title-input {
+        width: 100%;
+        font-family: inherit;
+        font-size: 1.3rem;
+        font-weight: 700;
+        padding: 10px 2px;
+        border: none;
+        border-bottom: 2px solid var(--border);
+        color: var(--ink);
+        background: none;
+      }
+      .composer-title-input:focus {
+        outline: none;
+        border-bottom-color: var(--accent);
+      }
+      .composer-meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 28px;
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .composer-field label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--ink-soft);
+        margin-bottom: 7px;
+      }
+      .composer-tag-field input {
+        font-family: inherit;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        width: 180px;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      .composer-author-static {
+        font-size: 0.9rem;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      .composer-editor-field .tox-tinymce {
+        border-radius: 10px !important;
+        border-color: var(--border) !important;
+      }
+      .composer-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 24px;
       }
 
       footer {
@@ -292,6 +452,10 @@
         font-size: 0.82rem;
         color: var(--ink-soft);
         line-height: 1.8;
+      }
+
+      [hidden] {
+        display: none !important;
       }
     </style>
   </head>
@@ -326,15 +490,18 @@
 
     <section class="notice-body">
       <div class="section-inner">
-        <div id="notice-add-slot"></div>
+        <div class="notice-add-row" id="notice-add-slot" hidden></div>
         <div id="notice-list-view">
           <ul class="notice-full-list" id="notice-full-list"></ul>
         </div>
         <div id="notice-detail-view" hidden>
           <span class="notice-detail-tag" id="detail-tag"></span>
-          <p class="notice-detail-date" id="detail-date"></p>
-          <p class="notice-detail-content" id="detail-content"></p>
+          <h2 class="notice-detail-title" id="detail-title"></h2>
+          <p class="notice-detail-meta" id="detail-meta"></p>
+          <div class="notice-detail-content" id="detail-content"></div>
+          <div class="notice-detail-actions" id="detail-actions"></div>
         </div>
+        <div id="notice-composer" hidden></div>
       </div>
     </section>
 
@@ -353,6 +520,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script src="admin-mode.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.3/tinymce.min.js"></script>
     <script>
       (function () {
         if (!window.supabaseClient) {
@@ -363,96 +531,256 @@
         var sb = window.supabaseClient;
         var params = new URLSearchParams(location.search);
         var noticeId = params.get("id");
+        var wantsNew = params.get("new") === "1";
 
         var listView = document.getElementById("notice-list-view");
         var detailView = document.getElementById("notice-detail-view");
         var fullList = document.getElementById("notice-full-list");
         var addSlot = document.getElementById("notice-add-slot");
+        var composer = document.getElementById("notice-composer");
         var backLink = document.getElementById("back-link");
         var pageSub = document.getElementById("page-sub");
 
-        if (noticeId) {
-          listView.hidden = true;
-          pageSub.hidden = true;
-          backLink.textContent = "← 공지사항 목록으로";
-          backLink.href = "notice.html";
-          loadDetail(noticeId);
-        } else {
-          detailView.hidden = true;
-          loadList();
-          document.addEventListener("admin-mode:on", function () {
-            renderAddButton();
-            loadList();
-          });
-          document.addEventListener("admin-mode:off", function () {
-            if (addSlot) addSlot.innerHTML = "";
-            loadList();
-          });
-          if (window.adminMode && window.adminMode.isOn) renderAddButton();
-        }
+        var TAG_OPTIONS = ["필독", "휴진", "안내", "이벤트"];
+
+        var TINYMCE_CONF = {
+          height: 380,
+          menubar: false,
+          license_key: "gpl",
+          branding: false,
+          plugins: "lists link image table code",
+          toolbar:
+            "undo redo | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | alignleft aligncenter alignright | bullist numlist | link image table | removeformat code",
+          content_style:
+            "body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.75;color:#241b2e;}",
+          images_upload_handler: function (blobInfo) {
+            return new Promise(function (resolve, reject) {
+              var file = blobInfo.blob();
+              var safeName = blobInfo
+                .filename()
+                .replace(/[^a-zA-Z0-9._-]/g, "_");
+              var path = Date.now() + "_" + safeName;
+              sb.storage
+                .from("notice-images")
+                .upload(path, file)
+                .then(function (res) {
+                  if (res.error) {
+                    reject(res.error.message);
+                    return;
+                  }
+                  var urlRes = sb.storage
+                    .from("notice-images")
+                    .getPublicUrl(path);
+                  resolve(urlRes.data.publicUrl);
+                });
+            });
+          },
+        };
 
         function formatDate(iso) {
           return new Date(iso).toLocaleDateString("ko-KR");
         }
 
+        function destroyEditor() {
+          var ed = tinymce.get("composer-editor");
+          if (ed) ed.remove();
+        }
+
+        // ---------- composer (write / edit screen) ----------
+        function openComposer(mode, data) {
+          listView.hidden = true;
+          detailView.hidden = true;
+          if (addSlot) addSlot.hidden = true;
+          composer.hidden = false;
+
+          var tagOptionsHtml = TAG_OPTIONS.map(function (t) {
+            return '<option value="' + t + '"></option>';
+          }).join("");
+
+          composer.innerHTML =
+            '<div class="composer-card">' +
+            '<p class="composer-heading">' +
+            (mode === "edit" ? "공지사항 수정" : "새 공지사항 작성") +
+            "</p>" +
+            '<div class="composer-field">' +
+            '<input type="text" id="composer-title" class="composer-title-input" placeholder="제목을 입력하세요" />' +
+            "</div>" +
+            '<div class="composer-meta-row">' +
+            '<div class="composer-field composer-tag-field">' +
+            "<label>태그</label>" +
+            '<input type="text" id="composer-tag" list="composer-tag-options" placeholder="태그 선택 또는 입력" />' +
+            '<datalist id="composer-tag-options">' +
+            tagOptionsHtml +
+            "</datalist>" +
+            "</div>" +
+            '<div class="composer-field">' +
+            "<label>작성자</label>" +
+            '<div class="composer-author-static">관리자</div>' +
+            "</div>" +
+            "</div>" +
+            '<div class="composer-field composer-editor-field">' +
+            '<textarea id="composer-editor"></textarea>' +
+            "</div>" +
+            '<div class="composer-actions">' +
+            '<button type="button" class="btn btn-ghost" id="composer-cancel">취소</button>' +
+            '<button type="button" class="btn btn-solid" id="composer-save">저장</button>' +
+            "</div>" +
+            "</div>";
+
+          document.getElementById("composer-title").value = data.title || "";
+          document.getElementById("composer-tag").value = data.tag || "안내";
+
+          tinymce.init(
+            Object.assign({}, TINYMCE_CONF, {
+              selector: "#composer-editor",
+              setup: function (editor) {
+                editor.on("init", function () {
+                  editor.setContent(data.content || "");
+                });
+              },
+            })
+          );
+
+          document
+            .getElementById("composer-cancel")
+            .addEventListener("click", function () {
+              closeComposer(mode, data);
+            });
+          document
+            .getElementById("composer-save")
+            .addEventListener("click", function () {
+              saveComposer(mode, data);
+            });
+        }
+
+        function closeComposer(mode, data) {
+          destroyEditor();
+          composer.hidden = true;
+          if (mode === "edit" && data.id) {
+            detailView.hidden = false;
+          } else {
+            listView.hidden = false;
+            if (addSlot) addSlot.hidden = false;
+          }
+        }
+
+        function saveComposer(mode, data) {
+          var title = document.getElementById("composer-title").value.trim();
+          var tag =
+            document.getElementById("composer-tag").value.trim() || "안내";
+          var content = tinymce.get("composer-editor").getContent();
+          if (!title) {
+            alert("제목을 입력해 주세요.");
+            return;
+          }
+          var saveBtn = document.getElementById("composer-save");
+          saveBtn.disabled = true;
+          saveBtn.textContent = "저장 중...";
+
+          var query =
+            mode === "edit"
+              ? sb
+                  .from("notices")
+                  .update({ title: title, tag: tag, content: content })
+                  .eq("id", data.id)
+              : sb
+                  .from("notices")
+                  .insert({ title: title, tag: tag, content: content });
+
+          query.then(function (res) {
+            if (res.error) {
+              alert("저장 실패: " + res.error.message);
+              saveBtn.disabled = false;
+              saveBtn.textContent = "저장";
+              return;
+            }
+            destroyEditor();
+            composer.hidden = true;
+            if (mode === "edit") {
+              detailView.hidden = false;
+              loadDetail(data.id);
+            } else {
+              listView.hidden = false;
+              if (addSlot) addSlot.hidden = false;
+              loadList();
+            }
+          });
+        }
+
+        // ---------- list ----------
         function loadList() {
           sb.from("notices")
-            .select("id, tag, content, created_at")
+            .select("id, tag, title, created_at")
             .eq("published", true)
             .order("created_at", { ascending: false })
             .then(function (res) {
               fullList.innerHTML = "";
-              if (res.error || !res.data) return;
-              if (!res.data.length) {
-                fullList.innerHTML =
-                  '<p style="color:var(--ink-soft);padding:20px 4px">등록된 공지사항이 없습니다.</p>';
+              if (res.error) return;
+              var rows = res.data || [];
+              if (!rows.length) {
+                var empty = document.createElement("li");
+                empty.className = "notice-empty";
+                empty.textContent = "등록된 공지사항이 없습니다.";
+                fullList.appendChild(empty);
                 return;
               }
-              res.data.forEach(renderListItem);
+              rows.forEach(renderListItem);
             });
         }
 
         function renderListItem(row) {
           var li = document.createElement("li");
           li.className = "notice-row-item";
-          var a = document.createElement("a");
-          a.href = "notice.html?id=" + row.id;
-          a.className = "notice-row-link";
+          var main = document.createElement("div");
+          main.className = "notice-row-main";
+
+          var link = document.createElement("a");
+          link.href = "notice.html?id=" + row.id;
+          link.className = "notice-row-link";
           var tag = document.createElement("span");
           tag.className = "notice-tag";
           tag.textContent = row.tag;
           var text = document.createElement("span");
           text.className = "notice-text";
-          text.textContent = row.content;
+          text.textContent = row.title;
           var date = document.createElement("span");
           date.className = "notice-date";
           date.textContent = formatDate(row.created_at);
-          a.appendChild(tag);
-          a.appendChild(text);
-          a.appendChild(date);
-          li.appendChild(a);
+          link.appendChild(tag);
+          link.appendChild(text);
+          link.appendChild(date);
+          main.appendChild(link);
 
           if (window.adminMode && window.adminMode.isOn) {
-            var editBtn = window.adminMode.makeEditBtn("✏️ 수정");
-            var delBtn = window.adminMode.makeEditBtn("🗑 삭제");
-            li.appendChild(editBtn);
-            li.appendChild(delBtn);
+            var actions = document.createElement("div");
+            actions.className = "notice-row-actions";
+            var editBtn = document.createElement("button");
+            editBtn.type = "button";
+            editBtn.className = "admin-row-btn";
+            editBtn.textContent = "✏️ 수정";
             editBtn.addEventListener("click", function () {
-              window.adminMode.openInlineEditor({
-                anchor: li,
-                initialText: row.content,
-                onSave: function (val) {
-                  return sb
-                    .from("notices")
-                    .update({ content: val })
-                    .eq("id", row.id)
-                    .then(function () {
-                      text.textContent = val;
-                      row.content = val;
-                    });
-                },
+              openComposer("edit", {
+                id: row.id,
+                title: row.title,
+                tag: row.tag,
+                content: null,
               });
+              // 본문은 수정 화면 열릴 때 따로 불러온다 (목록엔 없음)
+              sb.from("notices")
+                .select("content")
+                .eq("id", row.id)
+                .maybeSingle()
+                .then(function (r) {
+                  if (r.data) {
+                    var ed = tinymce.get("composer-editor");
+                    if (ed) ed.setContent(r.data.content || "");
+                  }
+                });
             });
+            var delBtn = document.createElement("button");
+            delBtn.type = "button";
+            delBtn.className = "admin-row-btn";
+            delBtn.textContent = "🗑 삭제";
             delBtn.addEventListener("click", function () {
               if (!confirm("이 공지사항을 삭제할까요?")) return;
               sb.from("notices")
@@ -463,99 +791,72 @@
                   else loadList();
                 });
             });
+            actions.appendChild(editBtn);
+            actions.appendChild(delBtn);
+            main.appendChild(actions);
           }
+
+          li.appendChild(main);
           fullList.appendChild(li);
         }
 
         function renderAddButton() {
           if (!addSlot) return;
+          addSlot.hidden = false;
           addSlot.innerHTML = "";
-          var btn = window.adminMode.makeEditBtn("+ 새 공지 추가");
-          btn.style.margin = "0 0 20px";
-          addSlot.appendChild(btn);
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "btn btn-solid";
+          btn.textContent = "+ 새 공지 작성";
           btn.addEventListener("click", function () {
-            btn.hidden = true;
-            var tagSelect = document.createElement("select");
-            ["필독", "휴진", "안내", "이벤트"].forEach(function (opt) {
-              var o = document.createElement("option");
-              o.textContent = opt;
-              tagSelect.appendChild(o);
-            });
-            tagSelect.style.cssText =
-              "margin-bottom:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;";
-            addSlot.appendChild(tagSelect);
-            window.adminMode.openInlineEditor({
-              anchor: tagSelect,
-              initialText: "",
-              onSave: function (val) {
-                if (!val)
-                  return Promise.reject(new Error("내용을 입력해 주세요."));
-                return sb
-                  .from("notices")
-                  .insert({ tag: tagSelect.value, content: val })
-                  .then(function (res) {
-                    if (res.error) throw new Error(res.error.message);
-                    tagSelect.remove();
-                    btn.hidden = false;
-                    loadList();
-                  });
-              },
-              onCancel: function () {
-                tagSelect.remove();
-                btn.hidden = false;
-              },
-            });
+            openComposer("add", {});
           });
+          addSlot.appendChild(btn);
         }
 
+        // ---------- detail ----------
         function loadDetail(id) {
           sb.from("notices")
-            .select("id, tag, content, created_at")
+            .select("id, tag, title, content, created_at")
             .eq("id", id)
             .maybeSingle()
             .then(function (res) {
               var detailContent = document.getElementById("detail-content");
+              var detailActions = document.getElementById("detail-actions");
+              detailActions.innerHTML = "";
               if (res.error || !res.data) {
                 document.getElementById("detail-tag").hidden = true;
-                document.getElementById("detail-date").hidden = true;
-                detailContent.textContent =
+                document.getElementById("detail-title").textContent =
                   "해당 공지사항을 찾을 수 없습니다.";
+                document.getElementById("detail-meta").hidden = true;
+                detailContent.innerHTML = "";
                 return;
               }
               var row = res.data;
               document.getElementById("detail-tag").textContent = row.tag;
-              document.getElementById("detail-date").textContent =
-                formatDate(row.created_at);
-              detailContent.textContent = row.content;
+              document.getElementById("detail-title").textContent =
+                row.title;
+              document.getElementById("detail-meta").textContent =
+                "관리자 · " + formatDate(row.created_at);
+              detailContent.innerHTML = row.content || "";
 
-              function addAdminControls() {
-                var old = detailView.querySelectorAll(
-                  '[data-admin-editor="1"]'
-                );
-                old.forEach(function (el) {
-                  el.remove();
-                });
-                var editBtn = window.adminMode.makeEditBtn("✏️ 수정");
-                var delBtn = window.adminMode.makeEditBtn("🗑 삭제");
-                detailView.appendChild(editBtn);
-                detailView.appendChild(delBtn);
+              if (window.adminMode && window.adminMode.isOn) {
+                var editBtn = document.createElement("button");
+                editBtn.type = "button";
+                editBtn.className = "btn btn-ghost";
+                editBtn.textContent = "✏️ 수정";
                 editBtn.addEventListener("click", function () {
-                  window.adminMode.openInlineEditor({
-                    anchor: detailContent,
-                    initialText: row.content,
-                    tall: true,
-                    onSave: function (val) {
-                      return sb
-                        .from("notices")
-                        .update({ content: val })
-                        .eq("id", row.id)
-                        .then(function () {
-                          detailContent.textContent = val;
-                          row.content = val;
-                        });
-                    },
+                  openComposer("edit", {
+                    id: row.id,
+                    title: row.title,
+                    tag: row.tag,
+                    content: row.content,
                   });
                 });
+                var delBtn = document.createElement("button");
+                delBtn.type = "button";
+                delBtn.className = "btn btn-ghost";
+                delBtn.textContent = "🗑 삭제";
                 delBtn.addEventListener("click", function () {
                   if (!confirm("이 공지사항을 삭제할까요?")) return;
                   sb.from("notices")
@@ -567,11 +868,39 @@
                       else location.href = "notice.html";
                     });
                 });
+                detailActions.appendChild(editBtn);
+                detailActions.appendChild(delBtn);
               }
-              document.addEventListener("admin-mode:on", addAdminControls);
-              if (window.adminMode && window.adminMode.isOn)
-                addAdminControls();
             });
+        }
+
+        // ---------- bootstrap ----------
+        if (noticeId) {
+          listView.hidden = true;
+          pageSub.hidden = true;
+          backLink.textContent = "← 공지사항 목록으로";
+          backLink.href = "notice.html";
+          loadDetail(noticeId);
+        } else {
+          detailView.hidden = true;
+          loadList();
+          document.addEventListener("admin-mode:on", function () {
+            renderAddButton();
+            if (wantsNew) {
+              wantsNew = false;
+              openComposer("add", {});
+            }
+          });
+          document.addEventListener("admin-mode:off", function () {
+            if (addSlot) {
+              addSlot.hidden = true;
+              addSlot.innerHTML = "";
+            }
+          });
+          if (window.adminMode && window.adminMode.isOn) {
+            renderAddButton();
+            if (wantsNew) openComposer("add", {});
+          }
         }
       })();
     </script>
