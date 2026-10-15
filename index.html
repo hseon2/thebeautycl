@@ -55,6 +55,13 @@
         -webkit-font-smoothing: antialiased;
         word-break: keep-all;
       }
+      body.menu-open {
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
+      }
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
@@ -336,6 +343,11 @@
       }
       .site-header.is-open .menu-toggle .icon-close {
         display: block;
+      }
+      @media (max-width: 480px) {
+        .menu-toggle {
+          margin-left: auto;
+        }
       }
       .mega-menu {
         position: absolute;
@@ -889,10 +901,28 @@
         .service-grid {
           grid-template-columns: repeat(2, 1fr);
         }
+        .service-card {
+          padding: 18px 14px;
+          gap: 8px;
+          min-height: 190px;
+        }
+        .service-icon {
+          width: 26px;
+          height: 26px;
+        }
+        .service-card h3 {
+          font-size: 0.95rem;
+        }
+        .service-card p {
+          font-size: 0.8rem;
+        }
       }
       @media (max-width: 420px) {
         .service-grid {
           grid-template-columns: 1fr;
+        }
+        .service-card {
+          min-height: 0;
         }
       }
 
@@ -1925,13 +1955,21 @@
         var toggle = document.querySelector(".menu-toggle");
         if (!header || !toggle) return;
 
+        var lockedScrollY = 0;
+
         function closeMenu() {
           header.classList.remove("is-open");
           toggle.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("menu-open");
+          document.body.style.top = "";
+          window.scrollTo(0, lockedScrollY);
         }
         function openMenu() {
+          lockedScrollY = window.scrollY;
           header.classList.add("is-open");
           toggle.setAttribute("aria-expanded", "true");
+          document.body.classList.add("menu-open");
+          document.body.style.top = -lockedScrollY + "px";
         }
 
         toggle.addEventListener("click", function () {
