@@ -736,7 +736,7 @@
         }
         .hero-fabs {
           right: 14px;
-          bottom: 44px;
+          bottom: 36px;
           gap: 6px;
         }
         .hero-fab {
@@ -872,14 +872,18 @@
           margin-top: 16px;
         }
         .about-quote {
-          font-size: clamp(0.91rem, 1.08vw, 0.99rem);
+          font-size: clamp(0.94rem, 1.12vw, 1.02rem);
         }
         .quote-line {
-          color: var(--ink-soft);
-          transition: color 0.5s ease;
+          color: #a6a0ab;
+          margin-bottom: 4px;
+          transition: color 0.3s ease;
         }
-        .quote-line.in-view {
-          color: var(--accent-strong);
+        .quote-line.is-active {
+          color: var(--accent);
+        }
+        .quote-line.is-passed {
+          color: var(--ink);
         }
         .about-career {
           margin-top: 16px;
@@ -2354,21 +2358,37 @@
       })();
 
       (function () {
-        var quotes = document.querySelectorAll(".quote-line");
-        if (!quotes.length || typeof IntersectionObserver === "undefined")
-          return;
-
-        var observer = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              entry.target.classList.toggle("in-view", entry.isIntersecting);
-            });
-          },
-          { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+        var quotes = Array.prototype.slice.call(
+          document.querySelectorAll(".quote-line")
         );
-        quotes.forEach(function (quote) {
-          observer.observe(quote);
-        });
+        if (!quotes.length) return;
+
+        var ticking = false;
+
+        function update() {
+          ticking = false;
+          var vh = window.innerHeight;
+          var bandTop = vh * 0.42;
+          var bandBottom = vh * 0.58;
+          quotes.forEach(function (line) {
+            var rect = line.getBoundingClientRect();
+            var center = rect.top + rect.height / 2;
+            var isActive = center >= bandTop && center <= bandBottom;
+            var isPassed = center < bandTop;
+            line.classList.toggle("is-active", isActive);
+            line.classList.toggle("is-passed", !isActive && isPassed);
+          });
+        }
+
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+
+        update();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
       })();
 
       (function () {
