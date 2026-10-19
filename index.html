@@ -736,7 +736,7 @@
         }
         .hero-fabs {
           right: 14px;
-          bottom: 32px;
+          bottom: 44px;
           gap: 6px;
         }
         .hero-fab {
@@ -807,6 +807,9 @@
       .about-quote + .about-quote {
         margin-top: 18px;
       }
+      .quote-line {
+        display: block;
+      }
       .about-sign {
         display: flex;
         align-items: center;
@@ -864,6 +867,22 @@
         }
         .about-edu {
           margin-bottom: 0;
+        }
+        .about-lead {
+          margin-top: 16px;
+        }
+        .about-quote {
+          font-size: clamp(0.91rem, 1.08vw, 0.99rem);
+        }
+        .quote-line {
+          color: var(--ink-soft);
+          transition: color 0.5s ease;
+        }
+        .quote-line.in-view {
+          color: var(--accent-strong);
+        }
+        .about-career {
+          margin-top: 16px;
         }
       }
 
@@ -1728,26 +1747,32 @@
         <div class="about-lead">
           <p class="eyebrow">원장 인사말</p>
           <p class="about-quote">
-            안녕하세요.<br />
-            한의사 이민정입니다.
+            <span class="quote-line">안녕하세요.</span>
+            <span class="quote-line">한의사 이민정입니다.</span>
           </p>
           <p class="about-quote">
-            한의원에 찾아오시는 모든 분들께<br />
-            저희가 해드리는 치료가 한 번으로 끝나지 않고<br />
-            건강한 생활의 시작이 될 수 있기를 간절히 바라며<br />
-            진료에 임하고 있습니다.
+            <span class="quote-line">한의원에 찾아오시는 모든 분들께</span>
+            <span class="quote-line"
+              >저희가 해드리는 치료가 한 번으로 끝나지 않고</span
+            >
+            <span class="quote-line"
+              >건강한 생활의 시작이 될 수 있기를 간절히 바라며</span
+            >
+            <span class="quote-line">진료에 임하고 있습니다.</span>
           </p>
           <p class="about-quote">
-            한의학은 나무만 보는 것이 아니라<br />
-            숲을 보는 의학입니다.<br />
-            그래서 아픈 곳만 고치기보다는<br />
-            생활을 바꾸고 몸이 달라지는<br />
-            치료가 되기를 희망합니다.
+            <span class="quote-line">한의학은 나무만 보는 것이 아니라</span>
+            <span class="quote-line">숲을 보는 의학입니다.</span>
+            <span class="quote-line">그래서 아픈 곳만 고치기보다는</span>
+            <span class="quote-line">생활을 바꾸고 몸이 달라지는</span>
+            <span class="quote-line">치료가 되기를 희망합니다.</span>
           </p>
           <p class="about-quote">
-            찾아오시는 모든 분들께<br />
-            저희의 진심이 감동으로 전해질 수 있도록<br />
-            항상 정성을 다하겠습니다.
+            <span class="quote-line">찾아오시는 모든 분들께</span>
+            <span class="quote-line"
+              >저희의 진심이 감동으로 전해질 수 있도록</span
+            >
+            <span class="quote-line">항상 정성을 다하겠습니다.</span>
           </p>
         </div>
         <div class="about-career">
@@ -2325,6 +2350,24 @@
         );
         cards.forEach(function (card) {
           observer.observe(card);
+        });
+      })();
+
+      (function () {
+        var quotes = document.querySelectorAll(".quote-line");
+        if (!quotes.length || typeof IntersectionObserver === "undefined")
+          return;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              entry.target.classList.toggle("in-view", entry.isIntersecting);
+            });
+          },
+          { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+        );
+        quotes.forEach(function (quote) {
+          observer.observe(quote);
         });
       })();
 
