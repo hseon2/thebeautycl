@@ -1796,7 +1796,7 @@
         </div>
         <div class="about-career">
           <h3>약력 및 학회활동</h3>
-          <ul class="career-list" data-career-list data-career-style="bold">
+          <ul class="career-list" data-site-list="career" data-list-title="약력" data-list-labels="1" data-list-style="bold">
             <li><b>전</b> 구리시 정경진한의원 부원장</li>
             <li><b>전</b> 의정부 보건소 한방진료실 과장</li>
             <li><b>전</b> 강서구 청암한의원장</li>
@@ -1925,7 +1925,7 @@
         <div class="more-care">
           <div class="more-care-col">
             <h4>일반 진료</h4>
-            <ul>
+            <ul data-site-list="general_care" data-list-title="일반 진료">
               <li>
                 여성질환 (생리통, 질염, 요실금, 방광염, 난임, 유산, 산후조리,
                 홧병)
@@ -1938,7 +1938,7 @@
           </div>
           <div class="more-care-col">
             <h4>특수 치료</h4>
-            <ul class="two-col">
+            <ul class="two-col" data-site-list="special_care" data-list-title="특수 치료">
               <li>산삼면역약침</li>
               <li>녹용약침</li>
               <li>태반약침 (자하거약침)</li>
@@ -1998,7 +1998,7 @@
         </div>
         <div>
           <table class="hours-table">
-            <tbody>
+            <tbody data-site-list="hours" data-list-title="진료 시간" data-list-labels="1">
               <tr>
                 <th>월요일 · 목요일</th>
                 <td>10:00 – 19:00</td>
@@ -2192,7 +2192,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script src="admin-mode.js"></script>
-    <script src="career-editor.js"></script>
+    <script src="site-lists.js"></script>
     <script>
       (function () {
         var thisYear = new Date().getFullYear();
