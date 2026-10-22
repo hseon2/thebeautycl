@@ -211,44 +211,18 @@
     "@media (max-width:560px){.sl-row .sl-label{width:72px;flex-basis:72px;}}";
   document.head.appendChild(css);
 
-  var openEditor = null;
-
-  function editorAnchor(el) {
-    // <tbody> 는 바로 뒤에 div 를 넣을 수 없으므로 <table> 기준으로 배치
-    return el.tagName === "TBODY" ? el.closest("table") : el;
-  }
-
-  function buildEditor(el) {
-    var key = el.getAttribute("data-site-list");
-    var labels = useLabels(el);
-    var title = el.getAttribute("data-list-title") || "목록";
-    var draft = (data[key] || []).map(function (it) {
-      return { label: it.label, text: it.text };
-    });
-    if (!draft.length) draft.push({ label: "", text: "" });
-
-    var box = document.createElement("div");
-    box.className = "sl-editor";
-    var hint = document.createElement("p");
-    hint.className = "sl-editor-hint";
-    hint.textContent = labels
-      ? "왼쪽은 구분, 오른쪽은 내용입니다. ▲▼로 순서를 바꾸고 ✕로 삭제합니다. " +
-        "저장하면 이 목록을 쓰는 모든 페이지에 함께 반영됩니다."
-      : "한 줄에 한 항목입니다. ▲▼로 순서를 바꾸고 ✕로 삭제합니다. " +
-        "저장하면 이 목록을 쓰는 모든 페이지에 함께 반영됩니다.";
-    box.appendChild(hint);
+  // 행 목록 편집 UI (구분/내용 입력 + ▲▼ 이동 + ✕ 삭제). draft 배열을 직접 수정합니다.
+  function createRowList(draft, labels) {
     var rowsWrap = document.createElement("div");
-    box.appendChild(rowsWrap);
-
-    function syncFromInputs() {
+    rowsWrap.className = "sl-rows";
+    function sync() {
       Array.prototype.forEach.call(rowsWrap.querySelectorAll(".sl-row"), function (row, i) {
         var l = row.querySelector(".sl-label");
         draft[i].label = l ? l.value : "";
         draft[i].text = row.querySelector(".sl-text").value;
       });
     }
-
-    function renderRows() {
+    function render() {
       rowsWrap.innerHTML = "";
       draft.forEach(function (it, i) {
         var row = document.createElement("div");
@@ -280,24 +254,24 @@
         del.textContent = "✕";
         del.title = "삭제";
         up.addEventListener("click", function () {
-          syncFromInputs();
+          sync();
           var t = draft[i - 1];
           draft[i - 1] = draft[i];
           draft[i] = t;
-          renderRows();
+          render();
         });
         down.addEventListener("click", function () {
-          syncFromInputs();
+          sync();
           var t = draft[i + 1];
           draft[i + 1] = draft[i];
           draft[i] = t;
-          renderRows();
+          render();
         });
         del.addEventListener("click", function () {
-          syncFromInputs();
+          sync();
           draft.splice(i, 1);
           if (!draft.length) draft.push({ label: "", text: "" });
-          renderRows();
+          render();
         });
         row.appendChild(text);
         row.appendChild(up);
@@ -306,7 +280,65 @@
         rowsWrap.appendChild(row);
       });
     }
-    renderRows();
+    function add() {
+      sync();
+      draft.push({ label: "", text: "" });
+      render();
+      var last = rowsWrap.querySelector(".sl-row:last-child input");
+      if (last) last.focus();
+    }
+    render();
+    return { el: rowsWrap, sync: sync, add: add, render: render };
+  }
+
+  // 다른 스크립트(섹션 편집기 등)에서 쓰는 공개 API
+  window.siteLists = {
+    get: function (key) {
+      return (data[key] || []).map(function (it) {
+        return { label: it.label, text: it.text };
+      });
+    },
+    set: function (key, items) {
+      data[key] = normalize(items);
+      if (byKey[key]) renderKey(key);
+    },
+    normalize: normalize,
+    createRowList: createRowList,
+    sb: sb,
+  };
+
+  var openEditor = null;
+
+  function editorAnchor(el) {
+    // <tbody> 는 바로 뒤에 div 를 넣을 수 없으므로 <table> 기준으로 배치
+    return el.tagName === "TBODY" ? el.closest("table") : el;
+  }
+
+  function buildEditor(el) {
+    var key = el.getAttribute("data-site-list");
+    var labels = useLabels(el);
+    var title = el.getAttribute("data-list-title") || "목록";
+    var draft = (data[key] || []).map(function (it) {
+      return { label: it.label, text: it.text };
+    });
+    if (!draft.length) draft.push({ label: "", text: "" });
+
+    var box = document.createElement("div");
+    box.className = "sl-editor";
+    var hint = document.createElement("p");
+    hint.className = "sl-editor-hint";
+    hint.textContent = labels
+      ? "왼쪽은 구분, 오른쪽은 내용입니다. ▲▼로 순서를 바꾸고 ✕로 삭제합니다. " +
+        "저장하면 이 목록을 쓰는 모든 페이지에 함께 반영됩니다."
+      : "한 줄에 한 항목입니다. ▲▼로 순서를 바꾸고 ✕로 삭제합니다. " +
+        "저장하면 이 목록을 쓰는 모든 페이지에 함께 반영됩니다.";
+    box.appendChild(hint);
+    var rowList = createRowList(draft, labels);
+    box.appendChild(rowList.el);
+    function syncFromInputs() {
+      rowList.sync();
+    }
+    var rowsWrap = rowList.el;
 
     var actions = document.createElement("div");
     actions.className = "sl-editor-actions";
@@ -315,11 +347,7 @@
     addBtn.className = "sl-add-btn";
     addBtn.textContent = "+ 항목 추가";
     addBtn.addEventListener("click", function () {
-      syncFromInputs();
-      draft.push({ label: "", text: "" });
-      renderRows();
-      var last = rowsWrap.querySelector(".sl-row:last-child input");
-      if (last) last.focus();
+      rowList.add();
     });
     var saveBtn = document.createElement("button");
     saveBtn.type = "button";
@@ -378,6 +406,7 @@
 
   function addTriggers() {
     nodes.forEach(function (el) {
+      if (el.hasAttribute("data-list-no-trigger")) return;
       var anchor = editorAnchor(el);
       var prev = anchor.previousElementSibling;
       if (prev && prev.classList && prev.classList.contains("sl-admin-slot")) return;
