@@ -158,6 +158,8 @@
       .wordmark {
         display: flex;
         align-items: center;
+        white-space: nowrap;
+        flex-shrink: 0;
         gap: 1px;
         font-weight: 700;
         font-size: 1.1rem;
@@ -576,6 +578,15 @@
         border: 1px solid var(--border);
         padding: 8px 10px;
       }
+      .about-career {
+        margin-top: 8px;
+      }
+      .about-career-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 10px;
+      }
       .care-points {
         display: flex;
         flex-direction: column;
@@ -812,7 +823,10 @@
             원광대학교 한의과대학 졸업<br />
             서울대학교 보건대학원 보건사회학 석사
           </p>
-          <ul class="care-points">
+        </div>
+        <div class="about-career">
+          <h3 class="about-career-title">약력 및 학회활동</h3>
+          <ul class="care-points" data-career-list data-career-style="plain">
             <li>전 구리시 정경진한의원 부원장</li>
             <li>전 의정부 보건소 한방진료실 과장</li>
             <li>전 강서구 청암한의원장</li>
@@ -854,6 +868,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script src="admin-mode.js"></script>
+    <script src="career-editor.js"></script>
     <script>
       (function () {
         var header = document.querySelector(".site-header");

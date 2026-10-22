@@ -204,6 +204,8 @@
       .wordmark {
         display: flex;
         align-items: center;
+        white-space: nowrap;
+        flex-shrink: 0;
         gap: 1px;
         font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
         font-weight: 700;
@@ -1794,7 +1796,7 @@
         </div>
         <div class="about-career">
           <h3>약력 및 학회활동</h3>
-          <ul class="career-list">
+          <ul class="career-list" data-career-list data-career-style="bold">
             <li><b>전</b> 구리시 정경진한의원 부원장</li>
             <li><b>전</b> 의정부 보건소 한방진료실 과장</li>
             <li><b>전</b> 강서구 청암한의원장</li>
@@ -2190,6 +2192,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script src="admin-mode.js"></script>
+    <script src="career-editor.js"></script>
     <script>
       (function () {
         var thisYear = new Date().getFullYear();
