@@ -797,15 +797,14 @@
 
     <section class="care-detail">
       <div class="section-inner">
-        <div class="care-detail-body">
-          <ul class="care-points">
+        <div class="care-detail-body"></div>
+        <ul class="care-points" data-site-list="general_care" data-list-title="일반 진료">
             <li>여성질환 (생리통, 질염, 요실금, 방광염, 난임, 유산, 산후조리, 홧병)</li>
             <li>과민성 장증후군 · 역류성 식도염</li>
             <li>감기 · 비염 · 소아성장 · 보약</li>
             <li>오십견 · 목디스크 · 거북목 · 척추관협착증 · 허리디스크</li>
             <li>제반 관절염 · 방아쇠손가락 · 염좌 · 타박 · 통증치료</li>
         </ul>
-        </div>
         <div class="care-nav">
           <a href="/care-special">특수 치료 보기 &rarr;</a>
         </div>
@@ -836,6 +835,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script src="admin-mode.js"></script>
+    <script src="site-lists.js"></script>
     <script>
       (function () {
         var header = document.querySelector(".site-header");
@@ -908,7 +908,7 @@
               if (bodyEl) {
                 bodyEl.textContent = row.body;
               } else {
-                var pointsList = document.querySelector(".care-points");
+                var pointsList = document.querySelector(".care-points:not([data-site-list])");
                 if (pointsList) {
                   var p = document.createElement("p");
                   p.textContent = row.body;
@@ -919,7 +919,7 @@
               }
             }
             if (row.points && row.points.length) {
-              var list = document.querySelector(".care-points");
+              var list = document.querySelector(".care-points:not([data-site-list])");
               if (list) {
                 list.innerHTML = "";
                 row.points.forEach(function (text) {

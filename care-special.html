@@ -797,8 +797,8 @@
 
     <section class="care-detail">
       <div class="section-inner">
-        <div class="care-detail-body">
-          <ul class="care-points">
+        <div class="care-detail-body"></div>
+        <ul class="care-points" data-site-list="special_care" data-list-title="특수 치료">
             <li>산삼면역약침</li>
             <li>녹용약침</li>
             <li>태반약침 (자하거약침)</li>
@@ -806,7 +806,6 @@
             <li>통증약침</li>
             <li>해독요법</li>
         </ul>
-        </div>
         <div class="care-nav">
           <a href="/care-general">일반 진료 보기 &rarr;</a>
         </div>
@@ -837,6 +836,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script src="admin-mode.js"></script>
+    <script src="site-lists.js"></script>
     <script>
       (function () {
         var header = document.querySelector(".site-header");
@@ -909,7 +909,7 @@
               if (bodyEl) {
                 bodyEl.textContent = row.body;
               } else {
-                var pointsList = document.querySelector(".care-points");
+                var pointsList = document.querySelector(".care-points:not([data-site-list])");
                 if (pointsList) {
                   var p = document.createElement("p");
                   p.textContent = row.body;
@@ -920,7 +920,7 @@
               }
             }
             if (row.points && row.points.length) {
-              var list = document.querySelector(".care-points");
+              var list = document.querySelector(".care-points:not([data-site-list])");
               if (list) {
                 list.innerHTML = "";
                 row.points.forEach(function (text) {
