@@ -1703,7 +1703,7 @@
     </section>
 
     <div class="hero-fabs">
-      <a class="hero-fab" href="tel:0260931075" aria-label="전화 예약">
+      <a class="hero-fab" data-fab="tel" href="tel:0260931075" aria-label="전화 예약">
         <span class="hero-fab-label">전화 예약</span>
         <svg viewBox="0 0 24 24">
           <path
@@ -1714,6 +1714,7 @@
       </a>
       <a
         class="hero-fab gold"
+        data-fab="booking"
         href="https://booking.naver.com/booking/13/bizes/815059?tr=bnm"
         target="_blank"
         rel="noopener"
@@ -1727,7 +1728,7 @@
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
       </a>
-      <a class="hero-fab" href="#visit" aria-label="오시는 길">
+      <a class="hero-fab" data-fab="visit" href="#visit" aria-label="오시는 길">
         <span class="hero-fab-label">오시는 길</span>
         <svg viewBox="-2 -2 28 28">
           <path
@@ -1738,6 +1739,7 @@
       </a>
       <a
         class="hero-fab"
+        data-fab="talk"
         href="https://talk.naver.com/ct/w4rqkx?frm=pmd#nafullscreen"
         target="_blank"
         rel="noopener"
@@ -1750,7 +1752,7 @@
           />
         </svg>
       </a>
-      <a class="hero-fab neutral" href="#top" aria-label="맨 위로">
+      <a class="hero-fab neutral" data-fab="top" href="#top" aria-label="맨 위로">
         <span class="hero-fab-label">맨 위로</span>
         <svg viewBox="0 0 24 24">
           <path d="M12 19V5" />
@@ -2203,6 +2205,7 @@
     <script src="admin-mode.js"></script>
     <script src="site-lists.js"></script>
     <script src="services-editor.js"></script>
+    <script src="fab-editor.js"></script>
     <script>
       (function () {
         var thisYear = new Date().getFullYear();
