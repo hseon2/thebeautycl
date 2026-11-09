@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>글꼴 테스트</title>
+    <link rel="stylesheet" href="/fonts/pretendard.css" />
+    <style>
+      body { margin: 16px; font-size: 16px; line-height: 1.5; }
+      h2 { font-size: 14px; margin: 18px 0 4px; color: #555; font-family: sans-serif; }
+      p { margin: 2px 0; font-size: 20px; }
+      pre { white-space: pre-wrap; font-size: 12px; background: #f3f3f3; padding: 8px; }
+      .p { font-family: "Pretendard", sans-serif; }
+      .a { font-family: "Apple SD Gothic Neo", sans-serif; }
+      .s { font-family: sans-serif; }
+    </style>
+  </head>
+  <body>
+    <h2>Pretendard (내장 글꼴) 굵기 400 / 500 / 600 / 700 / 800</h2>
+    <p class="p" style="font-weight: 400">400 한방성형 19년 대표원장</p>
+    <p class="p" style="font-weight: 500">500 한방성형 19년 대표원장</p>
+    <p class="p" style="font-weight: 600">600 한방성형 19년 대표원장</p>
+    <p class="p" style="font-weight: 700">700 한방성형 19년 대표원장</p>
+    <p class="p" style="font-weight: 800">800 한방성형 19년 대표원장</p>
+
+    <h2>Apple SD Gothic Neo 400 / 700</h2>
+    <p class="a" style="font-weight: 400">400 한방성형 19년 대표원장</p>
+    <p class="a" style="font-weight: 700">700 한방성형 19년 대표원장</p>
+
+    <h2>sans-serif 400 / 700</h2>
+    <p class="s" style="font-weight: 400">400 한방성형 19년 대표원장</p>
+    <p class="s" style="font-weight: 700">700 한방성형 19년 대표원장</p>
+
+    <h2>진단 정보 (이 화면을 캡처해서 보내 주세요)</h2>
+    <pre id="info">측정 중...</pre>
+
+    <script>
+      function width(weight) {
+        var el = document.createElement("span");
+        el.style.cssText =
+          "position:absolute;visibility:hidden;white-space:nowrap;font-size:40px;" +
+          "font-family:Pretendard,sans-serif;font-weight:" + weight;
+        el.textContent = "한방성형 대표원장 ABC 123";
+        document.body.appendChild(el);
+        var w = el.getBoundingClientRect().width;
+        el.remove();
+        return Math.round(w * 10) / 10;
+      }
+      function report() {
+        var lines = [];
+        lines.push("UA: " + navigator.userAgent);
+        lines.push("FontFace API: " + (document.fonts ? "있음" : "없음"));
+        if (document.fonts) {
+          lines.push("fonts.status: " + document.fonts.status);
+          document.fonts.forEach(function (f) {
+            lines.push("face " + f.family + " weight=" + f.weight + " status=" + f.status);
+          });
+          lines.push("check 700 Pretendard: " + document.fonts.check("700 16px Pretendard"));
+        }
+        [400, 500, 600, 700, 800].forEach(function (w) {
+          lines.push("너비 weight " + w + ": " + width(w));
+        });
+        lines.push("(너비가 굵기마다 다르면 굵기가 적용되는 중)");
+        document.getElementById("info").textContent = lines.join("\n");
+      }
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+      setTimeout(report, 2500);
+    </script>
+  </body>
+</html>
